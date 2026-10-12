@@ -40,7 +40,7 @@ class OpenAILLM:
                 ],
             )
         except Exception as e:
-            raise LLMError(f"OpenAI request failed: {e}") from e
+            raise LLMError(f"OpenAI request failed: {str(e)[:240]}") from e
         text = (resp.choices[0].message.content or "").strip()
         if not text:
             raise LLMError("OpenAI returned an empty response.")

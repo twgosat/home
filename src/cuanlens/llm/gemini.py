@@ -39,7 +39,7 @@ class GeminiLLM:
                 ),
             )
         except Exception as e:
-            raise LLMError(f"Gemini request failed: {e}") from e
+            raise LLMError(f"Gemini request failed: {str(e)[:240]}") from e
         text = (resp.text or "").strip()
         if not text:
             raise LLMError("Gemini returned an empty response (possibly blocked by safety filters).")
