@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cuanlens"
+version = "0.1.0"
+description = "Ubah data saham IDX & kripto yang rumit menjadi narasi yang mudah dipahami: tarik data, preprocessing, lalu analisis dengan Gemini/ChatGPT."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "CuanLens contributors" }]
+keywords = ["saham", "idx", "ihsg", "kripto", "stock-screener", "llm", "gemini", "openai", "yfinance", "fintech"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Indonesian",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Typing :: Typed",
+]
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "yfinance>=0.2.50",
+]
+
+[project.optional-dependencies]
+gemini = ["google-genai>=1.0"]
+openai = ["openai>=1.40"]
+all = ["google-genai>=1.0", "openai>=1.40"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+cuanlens = "cuanlens.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/twgosat/cuanlens"
+Issues = "https://github.com/twgosat/cuanlens/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cuanlens"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]  # long Indonesian message strings are kept on one line for grep-ability
