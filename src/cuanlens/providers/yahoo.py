@@ -74,7 +74,13 @@ class YahooProvider:
             history = ticker.history(period=period, auto_adjust=False)
         except Exception as e:
             raise DataError(f"Failed to fetch prices for {instrument.yahoo_symbol}: {e}") from e
-        history = normalize_ohlcv(history)  # raises DataError if empty (bad ticker / delisted)
+        try:
+            history = normalize_ohlcv(history)
+        except DataError as e:
+            raise DataError(
+                f"Yahoo returned no usable prices for {instrument.yahoo_symbol} ({e}). "
+                "Ticker salah/delisted, jaringan terblokir, atau Yahoo sedang membatasi laju."
+            ) from e
 
         info: dict[str, Any] = {}
         if self.include_info and instrument.market == "idx":

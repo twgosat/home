@@ -31,44 +31,72 @@ data emiten ─► preprocessing ─► StockBrief (±900 token) ─► Gemini /
 - **CLI** + **mode demo offline** (data sintetis) untuk mencoba tanpa jaringan.
 - Disclaimer **selalu** ditambahkan ke setiap narasi oleh library.
 
-## Instalasi
+## Cara menjalankan (dari nol)
+
+Butuh **Python 3.10+** dan internet (kecuali mode demo). Belum ada di PyPI, jadi pasang dari source:
+
+**macOS / Linux**
 
 ```bash
-pip install cuanlens                # inti + narator offline
-pip install "cuanlens[gemini]"      # + Google Gemini
-pip install "cuanlens[openai]"      # + OpenAI / endpoint kompatibel
-pip install "cuanlens[all]"
+git clone https://github.com/twgosat/cuanlens
+cd cuanlens
+python3 -m venv .venv && source .venv/bin/activate
+pip install -e ".[all]"
 ```
 
-Belum dirilis ke PyPI? Pasang dari source:
+**Windows (PowerShell)**
 
-```bash
-git clone https://github.com/twgosat/cuanlens && cd cuanlens
-pip install -e ".[all,dev]"
+```powershell
+git clone https://github.com/twgosat/cuanlens
+cd cuanlens
+py -m venv .venv ; .venv\Scripts\Activate.ps1
+pip install -e ".[all]"
 ```
 
-## Mulai cepat
+> Hanya butuh salah satu LLM? Pakai `".[gemini]"` atau `".[openai]"`; tanpa extras (`pip install -e .`) tetap jalan dengan narator offline. Nama repo di URL di atas mengikuti nama repo Anda setelah di-rename; sebelum itu pakai `twgosat/home`.
 
-Coba dulu tanpa jaringan dan tanpa API key (**data sintetis**, hanya untuk melihat alurnya):
+**Langkah 1: coba tanpa jaringan dan tanpa API key** (data *sintetis*, hanya untuk melihat alur):
 
 ```bash
 cuanlens analyze BBCA --demo
+cuanlens screen BBCA BBRI BMRI TLKM ASII --demo
 ```
 
-Data sungguhan + narasi offline:
+**Langkah 2: periksa jalur data live.** Perintah ini mengecek Python, harga/fundamental/berita dari Yahoo, dan kesiapan API key, lalu memberi tahu persis apa yang gagal dan cara memperbaikinya:
+
+```bash
+cuanlens doctor
+```
+
+**Langkah 3: data sungguhan** (narasi offline, tanpa LLM):
 
 ```bash
 cuanlens analyze BBCA
 cuanlens analyze BTC --market crypto
 ```
 
-Dengan LLM:
+**Langkah 4 (opsional): narasi LLM.** Ambil API key di Google AI Studio (Gemini) atau platform OpenAI, lalu:
 
 ```bash
-export GEMINI_API_KEY=...           # atau OPENAI_API_KEY
+export GEMINI_API_KEY=...            # Windows PowerShell: $env:GEMINI_API_KEY="..."
 cuanlens analyze BBRI --llm gemini
-cuanlens analyze BBRI --llm openai --model gpt-4o-mini --fallback
+cuanlens analyze BBRI --llm openai --model gpt-4o-mini --fallback   # butuh OPENAI_API_KEY
 ```
+
+Nama model bawaan bisa usang; ganti dengan `--model` atau variabel `CUANLENS_GEMINI_MODEL` / `CUANLENS_OPENAI_MODEL`. `--fallback` memakai narasi offline jika LLM gagal (kuota habis, key salah).
+
+**Pengembangan:** `pip install -e ".[all,dev]"` lalu `pytest` (semua test berjalan offline) dan `ruff check src tests`.
+
+### Masalah umum
+
+| Gejala | Penyebab & solusi |
+|---|---|
+| `doctor` menampilkan `[FAIL] Harga ...` | Jaringan/VPN/proxy memblokir Yahoo (`query1/query2.finance.yahoo.com`, `fc.yahoo.com`), atau Yahoo sedang membatasi laju. Tunggu beberapa menit, matikan VPN, atau pakai `--demo`. |
+| `Fundamental ... hanya N metrik` | Yahoo sering kosong/terlambat untuk emiten kecil. Analisis tetap jalan hanya dengan teknikal. |
+| `Set GEMINI_API_KEY` / `needs: pip install` | API key belum di-export di terminal yang sama, atau extras belum dipasang. |
+| `Cannot infer market for ...` | IDX = 4 huruf (`BBCA`). Kripto: `BTC`, `ETH-USD`, atau `--market crypto`. |
+
+### Fitur CLI lainnya
 
 Lihat persis apa yang dikirim ke LLM (tanpa memanggilnya) atau ambil JSON terstruktur:
 

@@ -7,6 +7,7 @@ import json
 import sys
 
 from . import __version__
+from .doctor import exit_code, format_report, run_doctor
 from .errors import CuanLensError
 from .llm import get_llm
 from .narrator import analyze
@@ -47,7 +48,16 @@ def _build_parser() -> argparse.ArgumentParser:
     s.add_argument("--sort", default="overall_score", dest="sort_by")
     s.add_argument("--workers", type=int, default=4)
     s.add_argument("--demo", action="store_true", help="Pakai data SINTETIS offline")
+
+    d = sub.add_parser("doctor", help="Periksa apakah jalur data live (Yahoo) dan LLM siap dipakai")
+    d.add_argument("symbols", nargs="*", default=["BBCA", "BTC"], help="Simbol uji (default: BBCA BTC)")
     return p
+
+
+def _cmd_doctor(args: argparse.Namespace) -> int:
+    checks = run_doctor(symbols=tuple(args.symbols))
+    print(format_report(checks))
+    return exit_code(checks)
 
 
 def _cmd_analyze(args: argparse.Namespace) -> int:
@@ -108,7 +118,8 @@ def _cmd_screen(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
     try:
-        return _cmd_analyze(args) if args.cmd == "analyze" else _cmd_screen(args)
+        handler = {"analyze": _cmd_analyze, "screen": _cmd_screen, "doctor": _cmd_doctor}[args.cmd]
+        return handler(args)
     except CuanLensError as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
