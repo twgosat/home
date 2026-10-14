@@ -221,8 +221,12 @@ def isi_piringku(w=300):
         large = 1 if frac > 0.5 else 0
         segs += f'<path d="M{cx} {cy} L{x0:.1f} {y0:.1f} A{r} {r} 0 {large} 1 {x1:.1f} {y1:.1f} Z" fill="{col}" stroke="#fff" stroke-width="4"/>'
         am = math.radians((a0 + a1) / 2)
-        lx, ly = cx + r * 0.6 * math.cos(am), cy + r * 0.6 * math.sin(am)
-        labels += (f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="17" fill="#3b2f2f">{lab}</text>')
+        lx, ly = cx + r * (0.55 if frac > 0.2 else 0.62) * math.cos(am), cy + r * (0.55 if frac > 0.2 else 0.62) * math.sin(am)
+        parts_ = lab.split(" ")
+        fs = 17 if frac > 0.2 else 15
+        dy0 = -(len(parts_) - 1) * fs * 0.55
+        labels += (f'<text x="{lx:.1f}" y="{ly + dy0 + fs * 0.35:.1f}" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="{fs}" fill="#3b2f2f">'
+                   + "".join(f'<tspan x="{lx:.1f}" dy="{0 if i == 0 else fs * 1.1:.1f}">{w}</tspan>' for i, w in enumerate(parts_)) + '</text>')
         a0 = a1
     plate = (f'<circle cx="{cx}" cy="{cy}" r="{r+22}" fill="#fff" stroke="#cfd8dc" stroke-width="4"/>'
              f'<circle cx="{cx}" cy="{cy}" r="{r+6}" fill="none" stroke="#e3e9ec" stroke-width="3"/>')

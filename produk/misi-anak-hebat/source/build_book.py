@@ -92,7 +92,18 @@ ul.tick li{display:flex;align-items:center;gap:6px;padding:4px 0;font-size:13.5p
 .grow{flex:1}
 .sig{border-top:2px solid #9aa0b1;padding-top:4px;text-align:center;font:500 12px 'Fredoka';color:#5b6070}
 .face5{display:flex;gap:6px}
+.ruled{background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 25px,#c9ced9 25px,#c9ced9 26.5px);min-height:54px}
+.fillbox{display:flex;flex-direction:column}
+.fillbox .ruled{flex:1}
 """
+
+
+SIG_SPACE = 64
+
+
+def sig(label, width=None):
+    w = f"width:{width}px;" if width else ""
+    return f'<div class="sigbox" style="{w}"><div style="height:{SIG_SPACE}px"></div><div class="sig">{label}</div></div>'
 
 
 def rainbow(text, start=0):
@@ -116,13 +127,13 @@ class Book:
         self.pages = []      # html strings
         self.marks = []      # (label, page index in body numbering) for bookmarks/TOC
 
-    def add(self, body, c=BRAND, deco="", bookmark=None, frame=True):
+    def add(self, body, c=BRAND, deco="", bookmark=None, frame=True, inner=""):
         n = len(self.pages)  # cover is page 0 -> body numbering starts at 1
         if bookmark:
             self.marks.append((bookmark, n))
         fr = '<div class="frame"></div>' if frame else ""
         foot = (f'<div class="foot"><a href="{URL}">{TITLE} · GoSatSet.xyz</a><span class="pnum">{n}</span></div>' if n else "")
-        self.pages.append(f'<section class="page" style="--c:{c[0]};--t:{c[1]}">{fr}{deco}<div class="inner">{body}</div>{foot}</section>')
+        self.pages.append(f'<section class="page" style="--c:{c[0]};--t:{c[1]}">{fr}{deco}<div class="inner" style="{inner}">{body}</div>{foot}</section>')
         return n
 
 
@@ -219,7 +230,7 @@ def p_identitas(b):
     c = BRAND
     fields = "".join(f'<div class="flex" style="align-items:flex-end;margin-bottom:14px;font-size:15px"><b style="width:118px;font-family:Fredoka;font-weight:600">{f}</b><span class="ln"></span></div>'
                      for f in ("Nama lengkap", "Panggilan", "Kelas", "Sekolah", "Umur", "Tanggal lahir"))
-    about = "".join(f'<div class="card" style="border-color:{H[k][2]}"><h3 style="color:{H[k][1]}">{t}</h3><div class="line"></div><div class="line"></div><div class="line"></div></div>'
+    about = "".join(f'<div class="card fillbox" style="border-color:{H[k][2]}"><h3 style="color:{H[k][1]}">{t}</h3><div class="ruled"></div></div>'
                     for k, t in ((1, "Cita-citaku"), (3, "Hobiku"), (4, "Makanan favoritku"), (6, "Sahabatku")))
     body = f"""
 <div class="center"><div class="kicker">Halo, Anak Hebat!</div><h1 style="font-size:46px">{rainbow("Jurnal Ini Milik…")}</h1>
@@ -230,12 +241,12 @@ def p_identitas(b):
   <div class="grow" style="padding-top:8px">{fields}</div>
 </div>
 <h2>Tentang Aku</h2>
-<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">{about}</div>
+<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;flex:1;min-height:0">{about}</div>
 <h2>Kebiasaan yang paling ingin aku kuasai bulan ini</h2>
 <div class="box"><div class="line"></div><div class="line"></div><div class="line"></div></div>
-<div class="flex" style="margin-top:auto;align-items:flex-end;gap:30px">
+<div class="flex" style="margin-top:14px;align-items:flex-end;gap:30px">
   <div class="grow small">Simpan jurnal ini di tempat yang mudah dilihat, misalnya di dekat meja belajar, supaya kamu ingat mengisinya setiap malam.</div>
-  <div style="width:230px"><div style="height:56px"></div><div class="sig">Tanda tangan Anak Hebat</div></div>
+  {sig("Tanda tangan Anak Hebat", 230)}
 </div>"""
     b.add(body, c, deco([(A.sun(90), "right:30px;top:24px"), (A.sparkle(22), "left:40px;top:60px")]), bookmark="Jurnal Ini Milik…")
 
@@ -246,12 +257,12 @@ def p_toc(b, entries):
     for grp, items in entries:
         rows += f'<div style="font:600 13px Fredoka;letter-spacing:.1em;color:#8a8fa3;text-transform:uppercase;margin:10px 0 4px">{grp}</div>'
         for label, pg, col in items:
-            rows += (f'<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1.5px dotted #dfe3ea">'
+            rows += (f'<div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1.5px dotted #dfe3ea">'
                      f'<span style="width:12px;height:12px;border-radius:50%;background:{col};flex:none"></span>'
-                     f'<span class="grow" style="font-size:15px">{label}</span><b style="font-family:Fredoka;font-size:15px;color:{col}">{pg}</b></div>')
+                     f'<span class="grow" style="font-size:15.5px">{label}</span><b style="font-family:Fredoka;font-size:15px;color:{col}">{pg}</b></div>')
     steps = [("1", "Persiapan", "Isi identitas, kontrak, peta awal &amp; target", "#16a34a"), ("2", "Misi Harian", "Isi tracker 7 misi setiap malam", "#2b7de9"),
              ("3", "Refleksi", "Setiap akhir pekan + paraf", "#7c4dff"), ("4", "Perayaan", "Peta akhir, bintang &amp; sertifikat", "#e07b00")]
-    flow = "".join(f'<div style="flex:1;border:2.5px solid {col};border-radius:16px;padding:10px;text-align:center"><div style="font:700 26px Fredoka;color:{col}">{n}</div>'
+    flow = "".join(f'<div style="flex:1;border:2.5px solid {col};border-radius:16px;padding:14px 10px;text-align:center"><div style="font:700 26px Fredoka;color:{col}">{n}</div>'
                    f'<div style="font:600 15px Fredoka;color:{col}">{t}</div><div class="small">{d}</div></div>' + ('<div style="align-self:center;font:700 22px Fredoka;color:#c4c9d6">›</div>' if n != "4" else "")
                    for n, t, d, col in steps)
     legend = "".join(f'<div style="text-align:center;width:84px"><div style="width:52px;height:52px;margin:0 auto;border-radius:50%;background:{H[k][2]};border:2.5px solid {H[k][1]};display:flex;align-items:center;justify-content:center">{A.MASCOT[k](38)}</div>'
@@ -294,8 +305,8 @@ Rumah adalah tempat terbaik untuk melatihnya setiap hari, dan jurnal ini dibuat 
 <ul class="tick">{tp}</ul>
 <h2>Cara Mencetak</h2>
 <p style="font-size:12.5px">Cetak di kertas A4. Halaman putih dirancang <b>hemat tinta</b>. Halaman tracker dan refleksi boleh dicetak ulang setiap bulan untuk dipakai lagi. Bisa juga diisi langsung di tablet dengan aplikasi anotasi PDF.</p>
-<p class="small" style="margin-top:auto">Jurnal ini adalah produk independen untuk mendukung pembiasaan di rumah dan sekolah, bukan terbitan resmi Kemendikdasmen.</p>"""
-    b.add(body, c, deco([(A.sparkle(24, "#ffd23f"), "right:34px;top:34px")]), bookmark="Panduan Ayah, Bunda & Guru")
+<p class="small">Jurnal ini adalah produk independen untuk mendukung pembiasaan di rumah dan sekolah, bukan terbitan resmi Kemendikdasmen.</p>"""
+    b.add(body, c, deco([(A.sparkle(24, "#ffd23f"), "right:34px;top:34px")]), bookmark="Panduan Ayah, Bunda & Guru", inner="justify-content:space-between")
 
 
 def p_guide2(b):
@@ -343,7 +354,7 @@ def p_kontrak(b):
     pr = "".join(f'<li style="padding:11px 0;border-bottom:1.5px dotted #f1d9b5"><span class="num" style="border-color:{H[i+1][1]};color:{H[i+1][1]};width:30px;height:30px">{i+1}</span><span style="font-size:17px">Aku akan <b>{p}</b>.</span></li>' for i, p in enumerate(promises))
     body = f"""
 <div class="center">{A.medal(90)}<div class="kicker" style="margin-top:4px">Langkah pertama</div><h1 style="font-size:44px">{rainbow("Kontrak Janji Anak Hebat")}</h1></div>
-<div class="box" style="margin-top:14px;padding:20px 24px;border-width:3px;border-style:dashed;font-size:15px">
+<div class="box" style="margin:16px 0 26px;padding:22px 26px;border-width:3px;border-style:dashed;font-size:15px;flex:1;display:flex;flex-direction:column;justify-content:space-between">
 <div class="flex" style="align-items:flex-end;font:500 17px Fredoka"><span>Aku,</span><span class="ln"></span><span>,</span></div>
 <p style="font-size:15px;margin-top:10px">berjanji menjalankan <b>Misi 30 Hari</b> dengan semangat. Selama misi ini:</p>
 <ul class="tick">{pr}</ul>
@@ -351,10 +362,8 @@ def p_kontrak(b):
 <p style="font-size:14px;margin-top:10px">Kalau ada hari yang terlewat, aku <b>tidak menyerah</b>. Aku akan mencoba lagi besok!</p>
 <div class="flex" style="align-items:flex-end;margin-top:6px;font:500 14px Fredoka"><span>Mulai tanggal</span><span class="ln"></span><span>sampai</span><span class="ln"></span></div>
 </div>
-<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:22px;margin-top:auto">
-<div><div style="height:90px"></div><div class="sig">Anak Hebat</div></div>
-<div><div style="height:70px"></div><div class="sig">Ayah / Bunda</div></div>
-<div><div style="height:70px"></div><div class="sig">Guru / Wali Kelas</div></div></div>"""
+<div class="grid" style="grid-template-columns:repeat(3,1fr);gap:22px">
+{sig("Anak Hebat")}{sig("Ayah / Bunda")}{sig("Guru / Wali Kelas")}</div>"""
     b.add(body, c, deco([(A.star(60), "left:36px;top:40px"), (A.star(46), "right:40px;top:60px"), (A.sparkle(22), "right:90px;top:30px")]), bookmark="Kontrak Janji Anak Hebat")
 
 
@@ -412,18 +421,18 @@ def p_target(b):
                    for k, ex in ((1, "contoh: bangun pukul 05.30"), (2, "contoh: berdoa sebelum makan &amp; tidur"), (3, "contoh: main bola 30 menit"),
                                  (4, "contoh: habiskan sayur saat makan siang"), (5, "contoh: membaca 15 menit"), (6, "contoh: membantu ibu menyiram tanaman"),
                                  (7, "contoh: tidur sebelum pukul 20.30")))
-    ladder = "".join(f'<div style="flex:1;text-align:center;border:2.5px solid {col};border-radius:18px;padding:10px 6px;background:#fff;margin-top:{mt}px">'
+    ladder = "".join(f'<div style="flex:1;text-align:center;border:2.5px solid {col};border-radius:18px;padding:10px 8px;background:#fff;height:{mt}px;display:flex;flex-direction:column;justify-content:flex-end">'
                      f'<div style="font:700 26px Fredoka;color:{col}">{d}</div><div style="font:600 12px Fredoka;color:{col}">BINTANG</div>'
                      f'<div style="margin:6px auto 0;width:40px">{A.star_outline(40, color=col)}</div><div class="line" style="margin-top:8px"></div><div class="line"></div><div class="line"></div><div class="small">hadiahku</div></div>'
-                     for d, col, mt in ((7, "#2b7de9", 120), (14, "#0f9d78", 80), (21, "#7c4dff", 40), (30, "#e5484d", 0)))
+                     for d, col, mt in ((7, "#2b7de9", 190), (14, "#0f9d78", 225), (21, "#7c4dff", 260), (30, "#e5484d", 295)))
     body = f"""<div class="center"><div class="kicker">Sepakati bersama Ayah / Bunda</div><h1 style="font-size:44px">{rainbow("Target &amp; Hadiahku")}</h1></div>
 <h2>Target kecilku untuk tiap misi</h2>
 <table style="font-size:13px"><tr><th>Misi</th><th>Targetku bulan ini</th></tr>{rows}</table>
 <h2>Tangga Hadiah</h2>
 <p style="font-size:13px">Setiap hari semua misi selesai (atau sesuai kesepakatan), kamu dapat 1 bintang di halaman <b>Koleksi Bintang</b>. Tulis hadiah yang disepakati di setiap anak tangga.</p>
-<div class="flex" style="align-items:flex-start;gap:12px">{ladder}</div>
-<div class="tint" style="margin-top:auto;font-size:12.5px"><b class="c">Ide hadiah tanpa belanja:</b> memilih menu makan malam, main bersama Ayah/Bunda 30 menit, piknik di taman, membaca cerita tambahan, menginap di rumah kakek-nenek, atau memilih film keluarga.</div>"""
-    b.add(body, c, deco([(A.trophy(64), "right:34px;top:30px")]), bookmark="Target & Hadiahku")
+<div class="flex" style="align-items:flex-end;gap:12px">{ladder}</div>
+<div class="tint" style="font-size:12.5px"><b class="c">Ide hadiah tanpa belanja:</b> memilih menu makan malam, main bersama Ayah/Bunda 30 menit, piknik di taman, membaca cerita tambahan, menginap di rumah kakek-nenek, atau memilih film keluarga.</div>"""
+    b.add(body, c, deco([(A.trophy(64), "right:34px;top:30px")]), bookmark="Target & Hadiahku", inner="justify-content:space-between")
 
 
 def p_jadwal(b):
@@ -433,9 +442,9 @@ def p_jadwal(b):
                    f'<span style="width:62px;font:600 15px Fredoka;color:{c[0]}">{t}</span><span class="grow"></span>'
                    f'<span style="display:flex;gap:4px">' + "".join(f'<span style="width:13px;height:13px;border-radius:50%;border:2px solid {H[k][1]}"></span>' for k in H) + '</span></div>'
                    for t in times)
-    legend = " ".join(f'<span class="pill" style="background:{H[k][2]};color:{H[k][1]}">● {H[k][0].replace(" & Bergizi","")}</span>' for k in H)
+    legend = "".join(f'<span class="pill" style="background:{H[k][2]};color:{H[k][1]};font-size:11px;padding:3px 8px;margin:0">● {H[k][0].replace(" & Bergizi","")}</span>' for k in H)
     body = f"""{header(3, "Jadwal Harianku", "Tulis kegiatanmu dari bangun sampai tidur. Warnai bulatan misi yang kamu lakukan di jam itu.", bulan=False, kicker="Rencana hari sekolah")}
-<div style="margin:2px 0 6px">{legend}</div>
+<div style="display:flex;justify-content:space-between;margin:2px 0 8px">{legend}</div>
 <div class="box" style="flex:1;display:grid;grid-template-rows:repeat({len(times)},1fr);padding:4px 14px">{rows}</div>
 <p class="small" style="margin-top:6px">Tips: tempel jadwal ini di dinding kamar. Jadwal libur boleh dibuat di halaman cetak ulang.</p>"""
     b.add(body, c, bookmark="Jadwal Harianku")
@@ -472,17 +481,20 @@ def intro(b, k, tagline, why, missions, fact, tip, draw="Gambar dirimu saat menj
 
 def p_time_log(b, k, title, sub, instr, label):
     c = hc(k)
-    cols = [range(1, 12), range(12, 22), range(22, 32)]
     def row(d):
         return (f'<div style="display:flex;align-items:center;gap:6px">'
                 f'<span class="num" style="width:32px;height:32px">{d}</span>'
                 f'<span style="flex:1;height:34px;border:2px dashed {c[0]}88;border-radius:10px 4px 4px 10px;clip-path:polygon(0 0,88% 0,100% 50%,88% 100%,0 100%);'
                 f'background:{c[1]};display:flex;align-items:center;padding-left:8px;font:500 12px Fredoka;color:{c[0]}99">..... : .....</span>'
                 f'<span style="width:28px;height:28px;flex:none">{A.star_outline(28, color=c[0])}</span></div>')
-    colhtml = "".join(f'<div style="display:grid;grid-template-rows:repeat(11,1fr);gap:4px">{"".join(row(d) for d in rg)}</div>' for rg in cols)
+    cells = ""
+    for d in range(1, 32):
+        col, r = (d - 1) // 11 + 1, (d - 1) % 11 + 1
+        cells += f'<div style="grid-column:{col};grid-row:{r}">{row(d)}</div>'
+    cells += (f'<div style="grid-column:3;grid-row:10 / span 2;border:2px dashed {c[0]};border-radius:14px;background:{c[1]};display:flex;align-items:center;gap:8px;padding:6px 10px;font-size:12px">'
+              f'<span style="width:26px;flex:none">{A.star_outline(26, color=c[0])}</span><span>{label}</span></div>')
     body = f"""{header(k, title, sub)}<div class="instr">{instr}</div>
-<div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:14px">{colhtml}</div>
-<div class="flex" style="margin-top:8px;align-items:center;font-size:12.5px"><span style="width:22px">{A.star_outline(22, color=c[0])}</span><span>{label}</span></div>"""
+<div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(11,1fr);gap:4px 14px;align-items:center">{cells}</div>"""
     b.add(body, c)
 
 
@@ -493,7 +505,7 @@ def p_salat(b):
     def block(n, col):
         circles = "".join(f'<span class="circ" style="border-color:{c[0]};width:34px;height:34px;font-size:14px">{d}</span>' for d in range(1, 32))
         return (f'<div style="display:flex;gap:10px;align-items:center;border:2px solid {c[1]};border-radius:18px;padding:8px 10px;background:#fff">'
-                f'<div style="width:96px;text-align:center"><div style="font:700 21px Fredoka;color:{col}">{n}</div>'
+                f'<div style="width:118px;text-align:center"><div style="font:700 21px Fredoka;color:{col}">{n}</div>'
                 f'<div style="margin:4px auto 0;width:56px">{A.hands(56)}</div></div>'
                 f'<div style="display:grid;grid-template-columns:repeat(11,1fr);gap:7px 4px;flex:1;justify-items:center">{circles}</div></div>')
     body = f"""{header(k, "Salat 5 Waktu", "Untuk keluarga Muslim. Warnai bulatan tanggal setiap kali selesai salat.", kicker="Misi 2 · Beribadah · Islam")}
@@ -517,7 +529,7 @@ RELIGIONS = [
     dict(name="Hindu", title="Tri Sandhya &amp; Pasraman", icon=A.dipa, accent="#e07b00",
          sub="Untuk keluarga Hindu. Warnai bulatan tanggal setiap kali selesai sembahyang.",
          daily=[("Tri Sandhya pagi", "±06.00"), ("Tri Sandhya siang", "±12.00"), ("Tri Sandhya sore", "±18.00"), ("Doa harian", "sebelum makan &amp; belajar")],
-         weekly="Persembahyangan &amp; Pasraman / Kelas Agama", cols=["Sembahyang di pura / merajan", "Pasraman"], learn="Sloka / cerita yang kupelajari",
+         weekly="Persembahyangan &amp; Pasraman / Kelas Agama", cols=["Sembahyang di pura", "Pasraman"], learn="Sloka / cerita yang kupelajari",
          note="Om Shanti Shanti Shanti Om. Saat Purnama dan Tilem, catat persembahyangan bersama keluarga di tabel mingguan."),
     dict(name="Buddha", title="Puja Bakti &amp; Sekolah Minggu", icon=A.dharma_wheel, accent="#c99400",
          sub="Untuk keluarga Buddhis. Warnai bulatan tanggal setiap kali selesai melakukannya.",
@@ -548,37 +560,47 @@ def p_ibadah(b, r):
 <div class="instr">Ibadah harian: warnai bulatan sesuai tanggalnya.</div>
 <div style="display:flex;flex-direction:column;gap:7px">{"".join(block(n, h) for n, h in r["daily"])}</div>
 <h2 style="color:{acc}">{r["weekly"]}</h2>
-<table style="font-size:12.5px;flex:1"><tr><th style="width:74px">Pekan</th><th style="width:70px">Tanggal</th><th style="width:76px">{r["cols"][0]}</th><th style="width:76px">{r["cols"][1]}</th><th>{r["learn"]}</th><th style="width:58px">Paraf</th></tr>{rows}</table>
+<table style="font-size:12.5px;flex:1"><tr style="height:44px"><th style="width:74px">Pekan</th><th style="width:70px">Tanggal</th><th style="width:76px">{r["cols"][0]}</th><th style="width:76px">{r["cols"][1]}</th><th>{r["learn"]}</th><th style="width:58px">Paraf</th></tr>{rows}</table>
 <div class="tint" style="margin-top:8px;font-size:12.5px;text-align:center">{r["note"]} <span class="small">Sesuaikan dengan kebiasaan keluarga dan tempat ibadahmu.</span></div>"""
     b.add(body, c, bookmark=f"Ibadah {r['name']}")
+
+
+def leaf_positions():
+    import math
+    cx, cy, rx, ry, sp = 340, 235, 320, 215, 84
+    rows = []
+    for y in (65, 130, 195, 260, 325, 390):
+        hw = rx * math.sqrt(max(0, 1 - ((y - cy) / ry) ** 2)) - 42
+        n = int(2 * hw // sp) + 1
+        xs = [cx - (n - 1) * sp / 2 + i * sp for i in range(n)]
+        rows.append([(round(x), y) for x in xs if not (280 < x < 400 and y > 300)])
+    pts = [p for r in rows for p in r]
+    while len(pts) > 31:  # drop symmetric extras from the widest row's ends
+        widest = max(rows, key=len)
+        widest.pop(0 if len(pts) % 2 else -1)
+        pts = [p for r in rows for p in r]
+    return pts
 
 
 def p_pohon_syukur(b):
     k = 2
     c = hc(k)
-    import math
     leaves = ""
-    # 31 leaves in rings inside a crown centred at (340,250)
-    rings = [(0, 1), (70, 7), (135, 11), (195, 12)]
-    d = 1
-    for r, n in rings:
-        for i in range(n):
-            if d > 31:
-                break
-            a = math.radians(-90 + i * 360 / n + (15 if r == 135 else 0))
-            x, y = 340 + r * 1.45 * math.cos(a), 245 + r * math.sin(a)
-            leaves += (f'<g transform="translate({x:.0f},{y:.0f}) rotate({(i*37)%60-30})"><path d="M0 -22 Q20 -8 0 22 Q-20 -8 0 -22Z" fill="#fff" stroke="{c[0]}" stroke-width="2.5"/>'
-                       f'<text x="0" y="6" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="14" fill="{c[0]}" transform="rotate({-((i*37)%60-30)})">{d}</text></g>')
-            d += 1
-    tree = (f'<svg viewBox="0 0 680 520" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">'
-            f'<ellipse cx="340" cy="245" rx="330" ry="235" fill="{c[1]}"/>'
-            f'<path d="M318 520 L326 380 Q300 340 250 330 M326 380 L330 300 M354 520 L350 380 Q380 340 430 330 M350 380 L346 300" stroke="#8a5a36" stroke-width="16" fill="none" stroke-linecap="round"/>'
-            f'<rect x="312" y="430" width="56" height="90" rx="10" fill="#8a5a36"/>{leaves}</svg>')
+    for d, (x, y) in enumerate(leaf_positions(), 1):
+        rot = ((d * 37) % 50) - 25
+        leaves += (f'<g transform="translate({x},{y})"><path transform="rotate({rot})" d="M0 -25 Q22 -8 0 25 Q-22 -8 0 -25Z" fill="#fff" stroke="{c[0]}" stroke-width="2.5"/>'
+                   f'<path transform="rotate({rot})" d="M0 -18 L0 18" stroke="{c[0]}" stroke-width="1" opacity=".35"/>'
+                   f'<text x="0" y="5" text-anchor="middle" font-family="Fredoka" font-weight="600" font-size="14" fill="{c[0]}">{d}</text></g>')
+    tree = (f'<svg viewBox="0 0 680 540" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">'
+            f'<ellipse cx="340" cy="235" rx="330" ry="225" fill="{c[1]}"/>'
+            f'<path d="M322 540 L326 400 Q300 360 262 344 M354 540 L350 400 Q380 360 418 344 M338 420 L340 330" stroke="#8a5a36" stroke-width="16" fill="none" stroke-linecap="round"/>'
+            f'<rect x="310" y="440" width="60" height="100" rx="10" fill="#8a5a36"/>'
+            f'<ellipse cx="340" cy="535" rx="120" ry="10" fill="#cfe9dc"/>{leaves}</svg>')
     weeks = "".join(f'<div class="box" style="padding:8px 10px"><h3 class="c">Minggu {w}: doa / harapanku</h3><div class="line"></div><div class="line"></div></div>' for w in range(1, 5))
     body = f"""{header(k, "Pohon Syukur &amp; Doa", kicker="Misi 2 · Beribadah · Semua Agama", sub="Untuk semua agama. Setiap malam, sebutkan satu hal yang kamu syukuri lalu warnai daun bertanggal hari itu.")}
 <div style="flex:1;min-height:0">{tree}</div>
 <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">{weeks}</div>"""
-    b.add(body, c)
+    b.add(body, c, bookmark="Ibadah Semua Agama: Pohon Syukur")
 
 
 def p_calendar(b, k, title, sub, instr, cols, fields, extra_cells=None, footer=""):
@@ -607,7 +629,7 @@ def p_bingo(b, k, title, sub, items, n, footer_html=""):
                       f'font:500 {14 if n == 5 else 15}px Fredoka;background:{c[1] if i % 2 else "#fff"}">{it}</div>')
     body = f"""{header(k, title, sub, bulan=False)}
 <div class="instr">Silang atau warnai kotak yang sudah kamu lakukan. Dapat satu baris lurus? <b>BINGO!</b> Warnai 1 bintang bonus.</div>
-<div style="height:{560 if n == 5 else 470}px;display:grid;grid-template-columns:repeat({n},1fr);grid-template-rows:repeat({n},1fr);gap:7px">{cells}</div>
+<div style="height:{700 if n == 5 else 470}px;display:grid;grid-template-columns:repeat({n},1fr);grid-template-rows:repeat({n},1fr);gap:7px">{cells}</div>
 {footer_html}"""
     b.add(body, c)
 
@@ -634,21 +656,21 @@ def p_food_log(b, k, days, with_header, extra=None):
 def p_piringku(b):
     k = 4
     c = hc(k)
-    plate_empty = (f'<svg viewBox="0 0 220 220" width="210" height="210"><circle cx="110" cy="110" r="104" fill="#fff" stroke="#cfd8dc" stroke-width="5"/>'
+    plate_empty = (f'<svg viewBox="0 0 220 220" width="280" height="280"><circle cx="110" cy="110" r="104" fill="#fff" stroke="#cfd8dc" stroke-width="5"/>'
                    f'<circle cx="110" cy="110" r="86" fill="none" stroke="#e3e9ec" stroke-width="3" stroke-dasharray="6 6"/></svg>')
     checks = ["Ada sayur", "Ada buah", "Ada makanan pokok (nasi, jagung, ubi, roti)", "Ada lauk (ikan, telur, ayam, tahu, tempe)", "Cuci tangan pakai sabun", "Minum air putih"]
     ck = "".join(f'<li><span class="chk"></span>{x}</li>' for x in checks)
     body = f"""{header(k, "Isi Piringku", "Pedoman gizi seimbang dari Kementerian Kesehatan: setengah piring sayur dan buah, setengah piring makanan pokok dan lauk pauk.", bulan=False)}
 <div class="flex" style="align-items:center;gap:20px">
-<div style="width:300px;flex:none">{A.isi_piringku(300)}</div>
+<div style="width:320px;flex:none">{A.isi_piringku(320)}</div>
 <div class="grow"><div class="fact" style="font-size:13.5px"><b class="c">Cara membaca piring:</b><br>
 • <b>Sayur</b> lebih banyak dari buah (sepertiga piring).<br>• <b>Buah</b> seperenam piring.<br>• <b>Makanan pokok</b> sepertiga piring.<br>• <b>Lauk pauk</b> seperenam piring.</div>
 <p class="small" style="margin-top:6px">Ukuran porsi menyesuaikan usia dan aktivitas anak.</p></div></div>
 <h2>Gambar piring makan siangmu!</h2>
-<div class="flex" style="gap:18px;align-items:center">
+<div class="flex" style="gap:18px;align-items:center;justify-content:space-around;margin-top:6px">
 <div class="center">{plate_empty}<div style="font:600 14px Fredoka;color:{c[0]}">Piringku hari ini</div><div class="small">Tanggal: ..................</div></div>
 <div class="center">{plate_empty}<div style="font:600 14px Fredoka;color:{c[0]}">Piring impianku yang seimbang</div><div class="small">Tanggal: ..................</div></div></div>
-<h2>Cek piringku</h2><div class="box"><ul class="tick" style="columns:2">{ck}</ul></div>"""
+<h2>Cek piringku</h2><div class="box" style="padding:14px 16px"><ul class="tick" style="columns:2;font-size:14.5px">{ck}</ul></div>"""
     b.add(body, c, deco([(A.carrot(56), "right:30px;bottom:60px")]))
 
 
@@ -660,10 +682,10 @@ def p_pelangi(b):
               ("Hijau", "#16a34a", "bayam, kangkung, brokoli, buncis, sawi, alpukat"),
               ("Ungu &amp; Biru", "#7c4dff", "terong, ubi ungu, anggur, kol ungu"),
               ("Putih &amp; Cokelat", "#8a6a4f", "kembang kol, jamur, tauge, salak, kentang")]
-    rows = "".join(f'<div style="display:flex;align-items:center;gap:12px;border-radius:16px;padding:8px 12px;border:2.5px solid {col}55">'
+    rows = "".join(f'<div style="flex:1;display:flex;align-items:center;gap:12px;border-radius:16px;padding:8px 12px;border:2.5px solid {col}55">'
                    f'<div style="width:20px;align-self:stretch;border-radius:10px;background:{col}"></div>'
                    f'<div class="grow"><div style="font:700 18px Fredoka;color:{col}">{n}</div><div class="small">contoh: {ex}</div>'
-                   f'<div class="flex" style="align-items:flex-end;margin-top:4px;font-size:12px"><span>Yang kumakan:</span><span class="ln" style="height:18px"></span></div></div>'
+                   f'<div class="flex" style="align-items:flex-end;margin-top:4px;font-size:12.5px"><span>Yang kumakan:</span><span class="ln" style="height:20px"></span></div><div class="ln" style="height:24px;margin-top:2px"></div></div>'
                    f'<div style="text-align:center"><div class="small">Minggu</div><div style="display:flex;gap:5px">' +
                    "".join(f'<span class="circ" style="border-color:{col};color:{col}">{w}</span>' for w in range(1, 5)) + '</div></div></div>' for n, col, ex in groups)
     body = f"""{header(k, "Pelangi Sayur &amp; Buah", "Makan beragam warna setiap minggu. Warnai bulatan minggu saat kamu sudah makan warna itu.", bulan=False)}
@@ -682,7 +704,7 @@ def p_reading(b):
 <table style="font-size:13px"><tr><th style="width:34px">No</th><th>Judul buku</th><th style="width:130px">Penulis</th><th style="width:70px">Tanggal selesai</th><th style="width:110px">Nilaiku</th></tr>
 {rows.replace('<td></td>', '<td style="height:36px"></td>')}</table>
 <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;flex:1">
-<div class="box"><h3 class="c">Kata baru yang kupelajari</h3><div class="lines">{'<div class="line"></div>'*5}</div></div>
+<div class="box fillbox"><h3 class="c">Kata baru yang kupelajari</h3><div class="ruled"></div></div>
 <div class="box"><h3 class="c">Gambar tokoh favoritku</h3></div></div>"""
     b.add(body, c)
 
@@ -692,16 +714,17 @@ def p_sleep_table(b):
     c = hc(k)
     def tbl(days):
         r = "".join(f'<tr><td class="center" style="font:600 13px Fredoka;color:{c[0]}">{d}</td><td class="center" style="color:#b4b9c6">.... : ....</td><td class="center" style="color:#b4b9c6">.... : ....</td><td></td><td class="center">{A.star_outline(18, color=c[0])}</td></tr>' for d in days)
-        return f'<table style="font-size:12.5px"><tr><th style="width:36px">Tgl</th><th>Jam tidur</th><th>Jam bangun</th><th style="width:52px">Total jam</th><th style="width:36px">☆</th></tr>{r}</table>'
+        extra = (f'<tr><td colspan="3" style="font:600 12.5px Fredoka;color:{c[0]}">Rata-rata jam tidurku bulan ini</td><td></td><td></td></tr>' if len(days) < 16 else "")
+        return f'<table style="font-size:12.5px;height:100%"><tr style="height:40px"><th style="width:36px">Tgl</th><th>Jam tidur</th><th>Jam bangun</th><th style="width:52px">Total jam</th><th style="width:36px">☆</th></tr>{r}{extra}</table>'
     body = f"""{header(k, "Jam Tidurku", "Tulis jam tidur dan jam bangun, lalu hitung berapa jam kamu tidur. Warnai bintang jika tidur 9 jam atau lebih (usia 6–12 tahun).")}
-<div class="flex" style="gap:14px;flex:1;align-items:flex-start">{tbl(range(1, 17))}{tbl(range(17, 32))}</div>
+<div class="flex" style="gap:14px;flex:1;align-items:stretch;margin-bottom:10px">{tbl(range(1, 17))}{tbl(range(17, 32))}</div>
 <div class="tint" style="font-size:12.5px;text-align:center">Cara menghitung: dari jam tidur sampai jam bangun. Contoh: tidur 20.30, bangun 05.30 = <b>9 jam</b>.</div>"""
-    b.add(body.replace("<td></td>", '<td style="height:43px"></td>'), c)
+    b.add(body, c)
 
 
-def chart_page(b, k, title, sub, ylabels, band=None, kind="dot", note=""):
+def chart_page(b, k, title, sub, ylabels, band=None, kind="dot", note="", height=600):
     c = hc(k)
-    W, Hh, L, T = 680, 600, 64, 16
+    W, Hh, L, T = 680, height, 64, 16
     gw, gh = W - L - 10, Hh - T - 40
     n = len(ylabels)
     g = ""
@@ -742,14 +765,14 @@ def p_refleksi(b, weeks):
     c = ("#7c4dff", "#f0ebff")
     def blk(w, rng):
         moods = "".join(f'<div style="text-align:center"><svg viewBox="0 0 40 40" width="34" height="34"><circle cx="20" cy="20" r="17" fill="#fff" stroke="{c[0]}" stroke-width="2.2"/></svg><div class="small">{d}</div></div>' for d in ("Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"))
-        return f"""<div class="box" style="flex:1;display:flex;flex-direction:column;gap:6px;border-width:2.5px">
+        return f"""<div class="box" style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:6px;border-width:2.5px">
 <div class="flex" style="align-items:center"><span class="tag">Minggu {w}</span><span class="small">hari ke-{rng}</span><span class="grow"></span><span style="display:flex;gap:2px">{"".join(A.star_outline(24, color=c[0]) for _ in range(5))}</span></div>
 <div><b style="font-family:Fredoka">Perasaanku minggu ini</b> <span class="small">(gambar wajah di tiap bulatan: senang, biasa, sedih)</span><div class="flex" style="justify-content:space-between;margin-top:4px">{moods}</div></div>
 <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px">
 <div><b style="font-family:Fredoka;color:#16a34a">Misi paling mudah</b><div class="line"></div></div>
 <div><b style="font-family:Fredoka;color:#e5484d">Misi paling sulit</b><div class="line"></div></div></div>
 <div><b style="font-family:Fredoka">Aku bangga karena…</b><div class="line"></div><div class="line"></div></div>
-<div><b style="font-family:Fredoka">Minggu depan aku akan…</b><div class="line"></div></div>
+<div><b style="font-family:Fredoka">Minggu depan aku akan…</b><div class="line"></div><div class="line"></div></div>
 <div class="flex" style="align-items:flex-end"><b style="font-family:Fredoka;white-space:nowrap">Pesan Ayah/Bunda:</b><span class="ln"></span><span class="small">paraf</span><span style="width:60px;border-bottom:2px solid #c4c9d6;height:22px"></span></div>
 </div>"""
     body = f"""{header(5, "Refleksi Mingguan", "Lihat kembali minggumu. Apa yang berhasil? Apa yang ingin dicoba lagi?", bulan=False, kicker="Akhir pekan").replace(A.MASCOT[5](86), A.star(86))}
@@ -778,26 +801,24 @@ def p_paraf(b):
 <p class="sub">Bawa jurnal ke sekolah setiap akhir pekan (bila diminta guru) untuk diparaf.</p></div>
 <table style="margin-top:14px;font-size:13px"><tr><th style="width:96px">Pekan</th><th style="width:90px">Tanggal</th><th style="width:110px">Paraf Ayah/Bunda</th><th style="width:100px">Paraf Guru</th><th>Catatan</th></tr>{rows}</table>
 <h2>Catatan perkembangan dari guru</h2>
-<div class="box lines" style="flex:1">{'<div class="line"></div>'*8}</div>
+<div class="box fillbox" style="flex:1"><div class="ruled"></div></div>
 <h2>Catatan dari Ayah / Bunda</h2>
-<div class="box lines">{'<div class="line"></div>'*4}</div>"""
+<div class="box fillbox" style="height:130px"><div class="ruled"></div></div>"""
     b.add(body, c, bookmark="Lembar Paraf Ayah-Bunda & Guru")
 
 
 def p_sertifikat(b):
     c = ("#e07b00", "#fff3e0")
     badges = "".join(f'<div style="width:58px;height:58px;border-radius:50%;background:{H[k][2]};border:2.5px solid {H[k][1]};display:flex;align-items:center;justify-content:center">{A.MASCOT[k](42)}</div>' for k in H)
-    body = f"""<div style="flex:1;border:6px double #e07b00;border-radius:28px;padding:30px 34px;display:flex;flex-direction:column;align-items:center;text-align:center">
-{A.medal(130)}
-<div class="kicker" style="font-size:15px;margin-top:6px">Sertifikat Penghargaan</div>
-<h1 style="font-size:62px;margin-top:6px">{rainbow("ANAK HEBAT")}</h1>
-<p style="font:500 18px Fredoka;margin-top:18px">dengan bangga diberikan kepada</p>
-<div style="width:80%;border-bottom:3px dashed #e07b00;height:56px"></div>
-<p style="font-size:16px;margin-top:18px;max-width:520px">karena telah menyelesaikan <b>Misi 30 Hari 7 Kebiasaan Anak Indonesia Hebat</b> dengan semangat, kejujuran, dan pantang menyerah.</p>
-<div class="flex" style="gap:10px;margin:18px 0">{badges}</div>
-<div class="flex" style="align-items:flex-end;font:500 15px Fredoka;width:70%"><span>Jumlah bintang:</span><span class="ln"></span><span>Tanggal:</span><span class="ln"></span></div>
-<div class="grid" style="grid-template-columns:1fr 1fr;gap:60px;width:85%;margin-top:auto">
-<div><div style="height:60px"></div><div class="sig">Ayah / Bunda</div></div><div><div style="height:60px"></div><div class="sig">Guru / Wali Kelas</div></div></div>
+    body = f"""<div style="flex:1;border:6px double #e07b00;border-radius:28px;padding:40px 40px 34px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center">
+<div>{A.medal(140)}<div class="kicker" style="font-size:16px;margin-top:8px">Sertifikat Penghargaan</div>
+<h1 style="font-size:70px;margin-top:8px">{rainbow("ANAK HEBAT")}</h1></div>
+<div style="width:100%;display:flex;flex-direction:column;align-items:center"><p style="font:500 19px Fredoka;margin:0">dengan bangga diberikan kepada</p>
+<div style="width:80%;border-bottom:3px dashed #e07b00;height:64px"></div></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:20px"><p style="font-size:17px;margin:0;max-width:540px">karena telah menyelesaikan <b>Misi 30 Hari 7 Kebiasaan Anak Indonesia Hebat</b> dengan semangat, kejujuran, dan pantang menyerah.</p>
+<div class="flex" style="gap:12px">{badges}</div></div>
+<div class="flex" style="align-items:flex-end;font:500 16px Fredoka;width:76%"><span>Jumlah bintang:</span><span class="ln"></span><span>Tanggal:</span><span class="ln"></span></div>
+<div class="grid" style="grid-template-columns:1fr 1fr;gap:60px;width:85%">{sig("Ayah / Bunda")}{sig("Guru / Wali Kelas")}</div>
 </div>"""
     b.add(body, c, deco([(A.star(50), "left:30px;top:30px"), (A.star(50), "right:30px;top:30px"), (A.sparkle(26), "left:60px;bottom:90px"), (A.sparkle(26), "right:60px;bottom:90px")]), bookmark="Sertifikat Anak Hebat", frame=False)
 
@@ -835,7 +856,7 @@ def build(toc_pages=None):
     p_time_log(b, 1, "Jam Bangunku", "Tulis jam berapa kamu bangun setiap hari.", "Tuliskan jam bangun pada tanggal tersebut. Warnai bintang jika kamu bangun sesuai target!", "= bangun sesuai target (lihat Target &amp; Hadiahku)")
     chart_page(b, 1, "Grafik Bangun Pagi", "Lihat garis jam bangunmu. Makin rata, makin teratur!",
                ["04.30", "05.00", "05.30", "06.00", "06.30", "07.00", "07.30"],
-               note='<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div class="box"><h3 class="c">Jam bangun paling pagi bulan ini</h3><div class="line"></div></div><div class="box"><h3 class="c">Yang membantuku bangun pagi</h3><div class="line"></div></div></div>')
+               note='<div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div class="box"><h3 class="c">Jam bangun paling pagi bulan ini</h3><div class="line"></div></div><div class="box"><h3 class="c">Yang membantuku bangun pagi</h3><div class="line"></div></div></div>', height=745)
     # Misi 2
     intro(b, 2, "Hati yang bersyukur membuat hari terasa indah.",
           [("Hati tenang", "Berdoa membantu kita lebih tenang saat senang maupun sedih."), ("Belajar bersyukur", "Kita jadi ingat hal-hal baik yang kita punya."), ("Berbuat baik", "Ajaran agama mengajak kita jujur, sabar, dan menolong.")],
@@ -898,8 +919,8 @@ def build(toc_pages=None):
               "Menyiram tanaman", "Antre dengan sabar", "Meminta maaf saat salah", "Mengajak teman baru bermain",
               "Membawakan barang orang tua", "Mendoakan orang lain", "Menjaga kebersihan kelas", "Mengucap terima kasih"]
     teman = ("<div class='grid' style='grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;flex:1'>"
-             "<div class='box'><h3 class='c'>Teman baru bulan ini</h3>" + "<div class='line'></div>" * 4 + "</div>"
-             "<div class='box'><h3 class='c'>Kebaikan yang kuterima dari orang lain</h3>" + "<div class='line'></div>" * 4 + "</div></div>")
+             "<div class='box fillbox'><h3 class='c'>Teman baru bulan ini</h3><div class='ruled'></div></div>"
+             "<div class='box fillbox'><h3 class='c'>Kebaikan yang kuterima dari orang lain</h3><div class='ruled'></div></div></div>")
     p_bingo(b, 6, "Bingo Kebaikan", "16 kebaikan kecil untuk orang-orang di sekitarmu.", bingo6, 4, teman)
     # Misi 7
     intro(b, 7, "Tidur cepat, bangun semangat!",
@@ -911,7 +932,7 @@ def build(toc_pages=None):
     chart_page(b, 7, "Grafik Tidurku", "Batang yang masuk zona ungu berarti tidurmu sudah cukup.",
                [f"{h} jam" for h in range(6, 14)], band=(3, 6, "Zona cukup tidur: 9–12 jam (usia 6–12 th)"), kind="bar",
                note=('<h2>Rutinitas malamku</h2><div class="box"><ul class="tick" style="columns:3">'
-                     + "".join(f'<li><span class="chk"></span>{x}</li>' for x in ("Mandi", "Sikat gigi", "Siapkan tas", "Gawai disimpan", "Baca buku", "Berdoa")) + "</ul></div>"))
+                     + "".join(f'<li><span class="chk"></span>{x}</li>' for x in ("Mandi", "Sikat gigi", "Siapkan tas", "Gawai disimpan", "Baca buku", "Berdoa")) + "</ul></div>"), height=705)
     # Rekap
     p_rekap(b)
     p_refleksi(b, [(1, "1–7"), (2, "8–14")])
