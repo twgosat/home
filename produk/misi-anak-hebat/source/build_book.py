@@ -496,11 +496,61 @@ def p_salat(b):
                 f'<div style="width:96px;text-align:center"><div style="font:700 21px Fredoka;color:{col}">{n}</div>'
                 f'<div style="margin:4px auto 0;width:56px">{A.hands(56)}</div></div>'
                 f'<div style="display:grid;grid-template-columns:repeat(11,1fr);gap:7px 4px;flex:1;justify-items:center">{circles}</div></div>')
-    body = f"""{header(k, "Salat 5 Waktu", "Untuk keluarga Muslim. Warnai bulatan tanggal setiap kali selesai salat.")}
+    body = f"""{header(k, "Salat 5 Waktu", "Untuk keluarga Muslim. Warnai bulatan tanggal setiap kali selesai salat.", kicker="Misi 2 · Beribadah · Islam")}
 <div class="instr">Beri tanda centang atau warnai bulatan sesuai tanggalnya.</div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:8px">{"".join(block(n, col) for n, col in names)}</div>
-<div class="tint" style="margin-top:8px;font-size:12.5px;text-align:center">Beribadah dengan ikhlas, hati tenang, hari pun berkah! Keluarga dengan agama lain bisa memakai halaman <b>Pohon Syukur &amp; Doa</b>.</div>"""
+<div class="tint" style="margin-top:8px;font-size:12.5px;text-align:center">Beribadah dengan ikhlas, hati tenang, hari pun berkah! Halaman ibadah untuk <b>Kristen, Katolik, Hindu, Buddha, dan Khonghucu</b> ada di halaman berikutnya.</div>"""
     b.add(body, c, deco([(A.mosque(70), "right:34px;top:26px")]))
+
+
+RELIGIONS = [
+    dict(name="Kristen", title="Doa &amp; Sekolah Minggu", icon=A.cross, accent="#2b7de9",
+         sub="Untuk keluarga Kristen. Warnai bulatan tanggal setiap kali selesai berdoa atau membaca Alkitab.",
+         daily=[("Doa pagi", "saat bangun tidur"), ("Doa makan", "sebelum &amp; sesudah makan"), ("Baca Alkitab", "atau renungan anak"), ("Doa malam", "sebelum tidur")],
+         weekly="Sekolah Minggu &amp; Ibadah Minggu", cols=["Sekolah Minggu", "Ibadah di gereja"], learn="Cerita / ayat hafalan minggu ini",
+         note="Tuhan memberkati! Ajak anak menceritakan kembali cerita Alkitab yang ia dengar di Sekolah Minggu."),
+    dict(name="Katolik", title="Doa &amp; Bina Iman Anak", icon=A.rosary, accent="#7c4dff",
+         sub="Untuk keluarga Katolik. Warnai bulatan tanggal setiap kali selesai berdoa.",
+         daily=[("Doa pagi", "saat bangun tidur"), ("Doa Malaikat Tuhan", "06.00 · 12.00 · 18.00"), ("Doa makan", "sebelum &amp; sesudah makan"), ("Doa malam", "sebelum tidur")],
+         weekly="Misa Hari Minggu &amp; Bina Iman Anak (BIA)", cols=["Misa", "BIA"], learn="Bacaan Injil / yang kupelajari",
+         note="Berkah Dalem! Di bulan Mei dan Oktober, ajak anak berdoa Rosario bersama keluarga (boleh satu peristiwa dulu)."),
+    dict(name="Hindu", title="Tri Sandhya &amp; Pasraman", icon=A.dipa, accent="#e07b00",
+         sub="Untuk keluarga Hindu. Warnai bulatan tanggal setiap kali selesai sembahyang.",
+         daily=[("Tri Sandhya pagi", "±06.00"), ("Tri Sandhya siang", "±12.00"), ("Tri Sandhya sore", "±18.00"), ("Doa harian", "sebelum makan &amp; belajar")],
+         weekly="Persembahyangan &amp; Pasraman / Kelas Agama", cols=["Sembahyang di pura / merajan", "Pasraman"], learn="Sloka / cerita yang kupelajari",
+         note="Om Shanti Shanti Shanti Om. Saat Purnama dan Tilem, catat persembahyangan bersama keluarga di tabel mingguan."),
+    dict(name="Buddha", title="Puja Bakti &amp; Sekolah Minggu", icon=A.dharma_wheel, accent="#c99400",
+         sub="Untuk keluarga Buddhis. Warnai bulatan tanggal setiap kali selesai melakukannya.",
+         daily=[("Puja bakti pagi", "Namakara Gatha"), ("Pancasila Buddhis", "mengulang 5 sila"), ("Meditasi singkat", "±5 menit, atur napas"), ("Puja bakti malam", "sebelum tidur")],
+         weekly="Sekolah Minggu Buddhis &amp; Puja Bakti di Vihara", cols=["Sekolah Minggu", "Puja bakti di vihara"], learn="Dhamma / cerita Jataka yang kupelajari",
+         note="Sabbe satta bhavantu sukhitatta, semoga semua makhluk berbahagia. Ikuti hari Uposatha sesuai jadwal vihara setempat."),
+    dict(name="Khonghucu", title="Sembahyang &amp; Kebaktian", icon=A.genta, accent="#e5484d",
+         sub="Untuk keluarga Khonghucu. Warnai bulatan tanggal setiap kali selesai melakukannya.",
+         daily=[("Sembahyang pagi", "bersyukur kepada Tian"), ("Doa makan", "sebelum makan"), ("Laku bakti", "berbakti kepada orang tua"), ("Sembahyang malam", "sebelum tidur")],
+         weekly="Kebaktian di Litang / Klenteng &amp; Sekolah Minggu", cols=["Kebaktian", "Sekolah Minggu"], learn="Ayat Kitab / ajaran yang kupelajari",
+         note="Wei De Dong Tian, hanya kebajikan yang berkenan kepada Tian. Catat juga sembahyang tanggal 1 dan 15 penanggalan Imlek bersama keluarga."),
+]
+
+
+def p_ibadah(b, r):
+    k = 2
+    c = hc(k)
+    acc = r["accent"]
+    def block(n, hint):
+        circles = "".join(f'<span class="circ" style="border-color:{c[0]};width:30px;height:30px;font-size:13px">{d}</span>' for d in range(1, 32))
+        return (f'<div style="display:flex;gap:10px;align-items:center;border:2px solid {c[1]};border-radius:16px;padding:6px 10px;background:#fff">'
+                f'<div style="width:118px"><div style="font:700 17px Fredoka;color:{acc};line-height:1.1">{n}</div><div class="small">{hint}</div></div>'
+                f'<div style="display:grid;grid-template-columns:repeat(11,1fr);gap:5px 4px;flex:1;justify-items:center">{circles}</div></div>')
+    rows = "".join(f'<tr><td class="center" style="font:600 13px Fredoka;color:{c[0]}">Minggu {w}</td><td></td><td class="center"><span class="chk"></span></td><td class="center"><span class="chk"></span></td><td></td><td></td></tr>' for w in range(1, 6))
+    body = f"""<div class="hd"><div class="ico">{r["icon"](86)}</div><div class="grow">
+<div class="kicker">Misi 2 · Beribadah · {r["name"]}</div><h1>{rainbow(r["title"], 2)}</h1><p class="sub">{r["sub"]}</p></div></div>
+<div class="bulan"><span class="tag">Bulan</span><span class="ln"></span><span class="tag">Tahun</span><span class="ln" style="flex:.45"></span></div>
+<div class="instr">Ibadah harian: warnai bulatan sesuai tanggalnya.</div>
+<div style="display:flex;flex-direction:column;gap:7px">{"".join(block(n, h) for n, h in r["daily"])}</div>
+<h2 style="color:{acc}">{r["weekly"]}</h2>
+<table style="font-size:12.5px;flex:1"><tr><th style="width:74px">Pekan</th><th style="width:70px">Tanggal</th><th style="width:76px">{r["cols"][0]}</th><th style="width:76px">{r["cols"][1]}</th><th>{r["learn"]}</th><th style="width:58px">Paraf</th></tr>{rows}</table>
+<div class="tint" style="margin-top:8px;font-size:12.5px;text-align:center">{r["note"]} <span class="small">Sesuaikan dengan kebiasaan keluarga dan tempat ibadahmu.</span></div>"""
+    b.add(body, c, bookmark=f"Ibadah {r['name']}")
 
 
 def p_pohon_syukur(b):
@@ -525,7 +575,7 @@ def p_pohon_syukur(b):
             f'<path d="M318 520 L326 380 Q300 340 250 330 M326 380 L330 300 M354 520 L350 380 Q380 340 430 330 M350 380 L346 300" stroke="#8a5a36" stroke-width="16" fill="none" stroke-linecap="round"/>'
             f'<rect x="312" y="430" width="56" height="90" rx="10" fill="#8a5a36"/>{leaves}</svg>')
     weeks = "".join(f'<div class="box" style="padding:8px 10px"><h3 class="c">Minggu {w}: doa / harapanku</h3><div class="line"></div><div class="line"></div></div>' for w in range(1, 5))
-    body = f"""{header(k, "Pohon Syukur &amp; Doa", "Untuk semua agama. Setiap malam, sebutkan satu hal yang kamu syukuri lalu warnai daun bertanggal hari itu.")}
+    body = f"""{header(k, "Pohon Syukur &amp; Doa", kicker="Misi 2 · Beribadah · Semua Agama", sub="Untuk semua agama. Setiap malam, sebutkan satu hal yang kamu syukuri lalu warnai daun bertanggal hari itu.")}
 <div style="flex:1;min-height:0">{tree}</div>
 <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">{weeks}</div>"""
     b.add(body, c)
@@ -790,9 +840,13 @@ def build(toc_pages=None):
     intro(b, 2, "Hati yang bersyukur membuat hari terasa indah.",
           [("Hati tenang", "Berdoa membantu kita lebih tenang saat senang maupun sedih."), ("Belajar bersyukur", "Kita jadi ingat hal-hal baik yang kita punya."), ("Berbuat baik", "Ajaran agama mengajak kita jujur, sabar, dan menolong.")],
           ["Berdoa saat bangun tidur", "Beribadah tepat waktu", "Berdoa sebelum makan", "Membaca kitab suci", "Mengucap terima kasih", "Berdoa sebelum tidur"],
-          "Beribadah adalah kebiasaan kedua dalam Gerakan 7 Kebiasaan Anak Indonesia Hebat [1]. Setiap keluarga bisa mengisi misi ini <b>sesuai agama dan keyakinannya</b>: ada halaman Salat 5 Waktu dan halaman Pohon Syukur &amp; Doa untuk semua agama.",
+          "Beribadah adalah kebiasaan kedua dalam Gerakan 7 Kebiasaan Anak Indonesia Hebat [1]. Pilih halaman <b>sesuai agama keluargamu</b>: Islam, Kristen, Katolik, Hindu, Buddha, atau Khonghucu. Halaman Pohon Syukur &amp; Doa bisa dipakai semua anak.",
           "beribadah bersama lebih menyenangkan daripada disuruh. Ajak anak berdoa bersama dan ceritakan kisah teladan dari agama keluarga.")
-    p_salat(b); p_pohon_syukur(b)
+    b.marks.append(("Ibadah Islam: Salat 5 Waktu", len(b.pages)))
+    p_salat(b)
+    for r in RELIGIONS:
+        p_ibadah(b, r)
+    p_pohon_syukur(b)
     # Misi 3
     intro(b, 3, "Ayo bergerak! Tubuh kuat, hati gembira.",
           [("Tubuh kuat", "Otot dan tulang tumbuh lebih kuat saat sering bergerak."), ("Tidur nyenyak", "Badan yang aktif di siang hari lebih mudah tidur di malam hari."), ("Banyak teman", "Bermain bola, lompat tali, dan gobak sodor seru dilakukan bersama.")],
@@ -877,7 +931,9 @@ def build(toc_pages=None):
                        ("Angka Rujukan &amp; Referensi", P("Angka Rujukan & Referensi"), BRAND[0]), ("Kontrak Janji Anak Hebat", P("Kontrak Janji Anak Hebat"), "#e07b00"),
                        ("Poster 7 Kebiasaan", P("Poster 7 Kebiasaan"), BRAND[0]), ("Peta Awalku", P("Peta Awalku"), "#7c4dff"),
                        ("Target &amp; Hadiahku", P("Target & Hadiahku"), "#e07b00"), ("Jadwal Harianku", P("Jadwal Harianku"), "#2b7de9")]),
-        ("7 Misi Harian", [(f"Misi {k}: {H[k][0].replace('&', '&amp;')}", P(f"Misi {k}: {H[k][0]}"), H[k][1]) for k in H]),
+        ("7 Misi Harian", [(f"Misi {k}: {H[k][0].replace('&', '&amp;')}", P(f"Misi {k}: {H[k][0]}"), H[k][1]) for k in H][:2]
+                          + [("&nbsp;&nbsp;↳ Ibadah 6 agama &amp; Pohon Syukur", f'{P("Ibadah Islam: Salat 5 Waktu")}–{int(P("Misi 3: Berolahraga")) - 1}', H[2][1])]
+                          + [(f"Misi {k}: {H[k][0].replace('&', '&amp;')}", P(f"Misi {k}: {H[k][0]}"), H[k][1]) for k in H][2:]),
         ("Rekap &amp; Perayaan", [("Tracker Gabungan 7 Misi", P("Tracker Gabungan 7 Misi"), BRAND[0]), ("Refleksi Mingguan", P("Refleksi Mingguan"), "#7c4dff"),
                                  ("Koleksi Bintangku", P("Koleksi Bintangku"), "#e07b00"), ("Peta Akhirku", P("Peta Akhirku"), BRAND[0]),
                                  ("Lembar Paraf Ayah-Bunda &amp; Guru", P("Lembar Paraf Ayah-Bunda & Guru"), "#0f9d78"), ("Sertifikat Anak Hebat", P("Sertifikat Anak Hebat"), "#e07b00")]),

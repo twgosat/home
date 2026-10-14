@@ -248,3 +248,47 @@ MASCOT = {
     6: lambda w=150: heart(w),
     7: lambda w=150: moon(w),
 }
+
+
+def cross(w=100, color="#2b7de9", cls=""):
+    b = (f'<circle cx="50" cy="50" r="46" fill="#e8f1fe"/>'
+         f'<path d="M42 12 H58 V34 H80 V50 H58 V90 H42 V50 H20 V34 H42 Z" fill="{color}" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>')
+    return _svg(b, w=w, cls=cls)
+
+
+def rosary(w=100, cls=""):
+    beads = "".join(f'<circle cx="{50+30*math.cos(math.radians(a)):.1f}" cy="{40+26*math.sin(math.radians(a)):.1f}" r="3.6" fill="#7c4dff"/>' for a in range(-60, 241, 20))
+    b = (f'<circle cx="50" cy="50" r="46" fill="#f0ebff"/>{beads}'
+         '<line x1="50" y1="66" x2="50" y2="74" stroke="#7c4dff" stroke-width="3"/>'
+         '<path d="M46 74 H54 V80 H62 V86 H54 V96 H46 V86 H38 V80 H46 Z" fill="#7c4dff"/>')
+    return _svg(b, w=w, cls=cls)
+
+
+def dipa(w=100, cls=""):
+    """oil lamp (pelita/dipa) with flame"""
+    b = ('<circle cx="50" cy="50" r="46" fill="#fff3e0"/>'
+         '<path d="M50 14 C60 28 60 40 50 46 C40 40 40 28 50 14 Z" fill="#ffb703" stroke="#e07b00" stroke-width="2"/>'
+         '<path d="M50 26 C54 33 54 38 50 42 C46 38 46 33 50 26 Z" fill="#fff4c2"/>'
+         '<path d="M18 52 Q50 50 82 52 Q76 74 50 76 Q24 74 18 52 Z" fill="#e07b00" stroke="#b45309" stroke-width="2"/>'
+         '<path d="M40 76 L36 88 H64 L60 76 Z" fill="#e07b00" stroke="#b45309" stroke-width="2"/>')
+    return _svg(b, w=w, cls=cls)
+
+
+def dharma_wheel(w=100, color="#e0a100", cls=""):
+    spokes = "".join(f'<line x1="50" y1="50" x2="{50+30*math.cos(math.radians(a)):.1f}" y2="{50+30*math.sin(math.radians(a)):.1f}" stroke="{color}" stroke-width="4"/>' for a in range(0, 360, 45))
+    knobs = "".join(f'<circle cx="{50+40*math.cos(math.radians(a)):.1f}" cy="{50+40*math.sin(math.radians(a)):.1f}" r="4.5" fill="{color}"/>' for a in range(0, 360, 45))
+    b = (f'<circle cx="50" cy="50" r="46" fill="#fff8db"/>{spokes}'
+         f'<circle cx="50" cy="50" r="32" fill="none" stroke="{color}" stroke-width="5"/>{knobs}'
+         f'<circle cx="50" cy="50" r="9" fill="{color}"/>')
+    return _svg(b, w=w, cls=cls)
+
+
+def genta(w=100, cls=""):
+    """bell (genta) — symbol used by Khonghucu communities in Indonesia"""
+    b = ('<circle cx="50" cy="50" r="46" fill="#fdeced"/>'
+         '<rect x="44" y="12" width="12" height="10" rx="4" fill="#c81e1e"/>'
+         '<path d="M50 20 C30 20 28 40 28 58 L22 72 H78 L72 58 C72 40 70 20 50 20 Z" fill="#e5484d" stroke="#c81e1e" stroke-width="3" stroke-linejoin="round"/>'
+         '<rect x="22" y="70" width="56" height="6" rx="3" fill="#c81e1e"/>'
+         '<circle cx="50" cy="84" r="6" fill="#ffd23f" stroke="#c81e1e" stroke-width="2"/>'
+         '<path d="M38 40 Q50 34 62 40" stroke="#ffd23f" stroke-width="3" fill="none"/>')
+    return _svg(b, w=w, cls=cls)

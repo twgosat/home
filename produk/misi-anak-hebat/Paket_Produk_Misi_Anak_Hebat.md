@@ -1,7 +1,7 @@
 # Paket Produk: Misi Anak Hebat
 
 **Judul produk:** Misi Anak Hebat: Jurnal Juara 30 Hari · 7 Kebiasaan Anak Indonesia Hebat
-**File:** `Misi_Anak_Hebat_Jurnal_Juara_30_Hari.pdf` (A4, 42 halaman = 1 cover + 41 halaman isi, latar putih hemat tinta)
+**File:** `Misi_Anak_Hebat_Jurnal_Juara_30_Hari.pdf` (A4, 47 halaman = 1 cover + 46 halaman isi, latar putih hemat tinta)
 
 ---
 
@@ -29,9 +29,9 @@ Kemendikdasmen meluncurkan Gerakan 7 Kebiasaan Anak Indonesia Hebat pada 27 Dese
 • REKAP & PERAYAAN: refleksi mingguan, koleksi bintang, peta akhir, dan sertifikat
 
 🎁 YANG KAMU DAPATKAN
-✔️ 1 file PDF, 42 halaman, ukuran A4, siap cetak
+✔️ 1 file PDF, 47 halaman, ukuran A4, siap cetak
 ✔️ 7 misi lengkap dengan tracker 31 hari (cocok untuk semua bulan)
-✔️ Tracker salat 5 waktu + Pohon Syukur & Doa untuk semua agama
+✔️ Halaman ibadah untuk 6 agama: Salat 5 Waktu (Islam), Doa & Sekolah Minggu (Kristen), Doa & Bina Iman Anak (Katolik), Tri Sandhya & Pasraman (Hindu), Puja Bakti & Sekolah Minggu (Buddha), Sembahyang & Kebaktian (Khonghucu) + Pohon Syukur & Doa
 ✔️ Grafik jam bangun dan grafik jam tidur
 ✔️ Catatan makan & minum 31 hari + Isi Piringku + Pelangi Sayur & Buah
 ✔️ Bingo Gerak (24 ide) dan Bingo Kebaikan (16 ide)
@@ -49,11 +49,11 @@ Kemendikdasmen meluncurkan Gerakan 7 Kebiasaan Anak Indonesia Hebat pada 27 Dese
 • Hadiah edukatif untuk keponakan atau murid
 
 ✨ KENAPA BERBEDA
-• 42 halaman, bukan sekadar 1 lembar ceklis
+• 47 halaman, bukan sekadar 1 lembar ceklis
 • Aktivitasnya beragam (menggambar, bingo, grafik, mewarnai), jadi anak tidak cepat bosan
 • Angka di panduan orang tua bersumber dari lembaga resmi, bukan kira-kira
 • Desain putih hemat tinta dan bisa dicetak ulang setiap bulan
-• Inklusif: halaman ibadah tersedia untuk semua agama
+• Inklusif: ada halaman ibadah harian dan jadwal mingguan (sekolah minggu, BIA, pasraman, kebaktian) untuk 6 agama di Indonesia
 
 🛒 CARA MENDAPATKAN
 1. Klik tombol beli dan selesaikan pembayaran
@@ -70,20 +70,20 @@ Mulai malam ini, cukup 5 menit sehari. Kebiasaan kecil yang diulang setiap hari 
 ## Hashtag
 
 ```
-#GoSatSet #MisiAnakHebat #7KebiasaanAnakIndonesiaHebat #7KAIH #JurnalAnak #HabitTrackerAnak #ParentingIndonesia #PrintableAnak #KegiatanAnak #AnakHebat
+#GoSatSet #MisiAnakHebat #7KebiasaanAnakIndonesiaHebat #7KAIH #JurnalAnak #HabitTrackerAnak #ParentingIndonesia #PrintableAnak #SekolahMinggu #AnakHebat
 ```
 
 ## Keyword
 
 ```
-jurnal 7 kebiasaan anak indonesia hebat, jurnal 7 kebiasaan anak hebat pdf, habit tracker anak printable, jurnal harian anak SD, tracker kebiasaan anak 30 hari, cara membiasakan anak bangun pagi, lembar kegiatan anak printable, jurnal 7 KAIH 2026, buku kegiatan anak TK SD pdf, template jurnal anak siap cetak
+jurnal 7 kebiasaan anak indonesia hebat, jurnal 7 kebiasaan anak hebat pdf, habit tracker anak printable, jurnal harian anak SD, tracker kebiasaan anak 30 hari, cara membiasakan anak bangun pagi, lembar kegiatan anak printable, jurnal 7 KAIH 2026, jurnal ibadah anak semua agama, tracker sekolah minggu anak, template jurnal anak siap cetak
 ```
 
 ## Info Formulir
 
 | Kolom | Isi |
 |---|---|
-| Jumlah halaman | 42 (1 cover + 41 isi) |
+| Jumlah halaman | 47 (1 cover + 46 isi) |
 | Format | PDF, A4 portrait, siap cetak |
 | Kategori | Parenting & Pendidikan Anak (alternatif: Template Printable / Edukasi) |
 
@@ -98,7 +98,7 @@ jurnal 7 kebiasaan anak indonesia hebat, jurnal 7 kebiasaan anak hebat pdf, habi
 Alasan:
 - **Pesaing cetak murah:** jurnal 7 Kebiasaan cetak di Tokopedia dijual sekitar Rp 13.500–Rp 19.999 per buku, dan buku siswa jurnal dari penerbit (Aryaduta) Rp 27.500. Itu harga **per anak, sekali pakai**. File ini bisa dicetak ulang setiap bulan untuk satu keluarga atau satu kelas, jadi wajar di atas harga satu buku cetak.
 - **Ada alternatif gratis** (Twinkl jurnal 30 hari, berkas di Scribd/SlideShare), sehingga harga promo sebaiknya mendekati harga satu buku cetak (Rp 29.000) agar keputusan beli terasa ringan.
-- **Nilai tambah nyata:** 42 halaman dengan aktivitas beragam, panduan orang tua bersumber, sertifikat, dan halaman untuk semua agama, jauh di atas jurnal 1–12 lembar. Paket edukasi dengan poster di marketplace sudah Rp 50.000–Rp 62.500, sehingga harga normal Rp 49.000 masih di bawahnya.
+- **Nilai tambah nyata:** 47 halaman dengan aktivitas beragam, panduan orang tua bersumber, sertifikat, dan halaman ibadah untuk 6 agama, jauh di atas jurnal 1–12 lembar. Paket edukasi dengan poster di marketplace sudah Rp 50.000–Rp 62.500, sehingga harga normal Rp 49.000 masih di bawahnya.
 - **Launch Rp 19.000** untuk mengumpulkan ulasan dan bukti sosial awal.
 
 ⚠️ Harga coret Rp 49.000 harus benar-benar berlaku setelah promo selesai. Harga referensi palsu menyesatkan pembeli.

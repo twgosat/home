@@ -81,7 +81,7 @@ B["02-story-1080x1920"] = (1080, 1920, f"""
  <div class="hl rb" style="font-size:100px;margin-top:14px">{rbw("MISI ANAK HEBAT")}</div>
  <div class="hl" style="font-size:38px;margin-top:10px">7 Kebiasaan Anak Indonesia Hebat</div>
  <div style="text-align:left;margin:26px auto 0;width:760px;font-size:34px;font-weight:600;line-height:1.7;background:rgba(255,255,255,.92);border-radius:28px;padding:18px 34px">
-  ✅ {PAGES} halaman siap cetak A4<br>✅ Tracker 31 hari untuk 7 misi<br>✅ Bingo gerak, Isi Piringku &amp; Pohon Syukur<br>✅ Panduan Ayah-Bunda + sertifikat</div>
+  ✅ {PAGES} halaman siap cetak A4<br>✅ Tracker 31 hari untuk 7 misi<br>✅ Halaman ibadah untuk 6 agama<br>✅ Panduan Ayah-Bunda + sertifikat</div>
  <div class="cta" style="font-size:40px;padding:18px 54px;margin-top:30px">Ambil Sekarang</div>
 </div>
 """)
@@ -113,10 +113,10 @@ B["04-header-web-1920x600"] = (1920, 600, f"""
 {book(1330, 70, 300)}
 """)
 
-CARDS = [(1, "Tracker 31 Hari", "Jam bangun, salat 5 waktu, olahraga, makan, belajar, kebaikan, jam tidur"),
+CARDS = [(1, "Tracker 31 Hari", "Jam bangun, ibadah, olahraga, makan, belajar, kebaikan, jam tidur"),
          (4, "Isi Piringku &amp; Pelangi", "Belajar gizi seimbang sesuai pedoman Kemenkes"),
          (3, "Bingo Gerak &amp; Kebaikan", "40 ide aktivitas seru tanpa gawai"),
-         (2, "Pohon Syukur &amp; Doa", "Halaman ibadah untuk semua agama"),
+         (2, "Ibadah 6 Agama", "Islam, Kristen, Katolik, Hindu, Buddha, Khonghucu + Pohon Syukur"),
          (5, "Refleksi Mingguan", "Grafik, log buku, paraf Ayah-Bunda &amp; guru"),
          (7, "Bintang &amp; Sertifikat", "Tangga hadiah, koleksi bintang, sertifikat")]
 cards = "".join(f'<div style="background:#fff;border-radius:28px;border:4px solid {BB.H[k][1]}55;padding:20px 22px;display:flex;gap:18px;align-items:center">'
