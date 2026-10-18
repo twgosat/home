@@ -8,6 +8,9 @@ body { margin: 0; font-family: 'Inter', 'DejaVu Sans', sans-serif; color: #16241
 .kartu dl { margin: 0; }
 .kartu dt { font-weight: 800; color: #0b6e83; margin-top: 3mm; }
 .kartu dd { margin: 0 0 1mm 0; }
+.kartu.depan dt { font-size: 16pt; margin-top: 5mm; }
+.kartu.depan dd { font-size: 18pt; line-height: 1.35; }
+.kartu.depan .transisi { font-size: 16pt; }
 .kartu ol { margin: 0; padding-left: 7mm; }
 .kartu li { margin-bottom: 1.6mm; }
 .kartu .transisi, .kartu .hubungi { margin-top: 4mm; padding: 2.5mm 3mm; border-radius: 3mm;

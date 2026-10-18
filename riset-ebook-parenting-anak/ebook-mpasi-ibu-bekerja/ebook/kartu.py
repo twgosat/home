@@ -13,7 +13,7 @@ DISCLAIMER = "Panduan umum dari pedoman resmi, bukan pengganti konsultasi tenaga
 TRANSISI = {
     "6-8": "Menjelang 9 bulan: naikkan tekstur bertahap ke makanan dicincang halus.",
     "9-11": "Menjelang 12 bulan: kenalkan makanan keluarga sedikit demi sedikit.",
-    "12-23": "Menyusui tetap dilanjutkan.",
+    "12-23": "",
 }
 
 
@@ -39,7 +39,7 @@ def render_kartu(data: Data, usia: str) -> str:
     gula = "gula_garam.bawah_12" if usia != "12-23" else "hindari.tinggi_gula_garam"
     transisi = TRANSISI[usia]
     if usia == "12-23":
-        transisi += " " + _awal(_v(data, 'asi.lanjut')) + "."
+        transisi = _awal(_v(data, 'asi.lanjut')) + "."
     depan_kunci = [f"tekstur.{usia}", f"frekuensi.{usia}", f"porsi.{usia}", "hewani.harian"]
     depan = f"""<section class="kartu depan">
   <div class="tag">KARTU PENGASUH · sisi depan</div>
