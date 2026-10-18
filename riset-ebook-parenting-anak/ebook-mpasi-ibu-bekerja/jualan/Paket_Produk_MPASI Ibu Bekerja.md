@@ -2,6 +2,18 @@
 
 *Disusun 18 Oktober 2026 dari PDF hasil build (43 halaman). Angka harga pesaing adalah cuplikan marketplace dan perlu dicek ulang setiap 3 bulan.*
 
+## Deskripsi Singkat
+
+```
+Masak MPASI sekali di hari Minggu, pengasuh tinggal ikut kartu. Ebook PDF 43 halaman untuk orang tua bekerja dengan anak 6–23 bulan: menu 4 minggu tanpa gula-garam dengan protein hewani setiap hari, aturan simpan dan panaskan yang aman, plus Kartu Pengasuh dan Kit Cetak untuk nenek, pengasuh, atau daycare. Semua angka bersumber dari WHO, Kemenkes, dan IDAI.
+```
+
+Versi satu baris (untuk judul kecil, bio, atau caption):
+
+```
+Masak sekali seminggu, pengasuh tinggal ikut kartu: panduan MPASI 6–23 bulan untuk ibu bekerja, bersumber WHO, Kemenkes & IDAI.
+```
+
 ## Deskripsi Lengkap (tempel ke Lynk.id; ubah baris HURUF BESAR jadi heading lewat toolbar editor)
 
 ```
