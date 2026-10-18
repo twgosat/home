@@ -1,49 +1,66 @@
-"""Sampul 850×1100 (rasio Letter) dirender jadi PNG. Skala 2 untuk PDF, 3 untuk HD 2550×3300."""
+"""Sampul 850×1100 (rasio Letter) dirender jadi PNG. Skala 2 untuk PDF, 3 untuk HD 2550×3300.
+Tema anak & parenting: latar krem, bentuk bulat coral/kuning/biru langit/lavender, judul Nunito."""
 from __future__ import annotations
 
 import html as _h
 from pathlib import Path
 
+from .tema import PALET as P, font_css
 
-def html_sampul(subjudul: str, pil: list[str], tahun: int) -> str:
-    pills = "".join(f'<span class="pill">{_h.escape(p)}</span>' for p in pil)
-    # Ilustrasi: rak freezer berisi wadah berlabel + kalender Senin–Jumat dicentang (di bawah semua teks).
+TUTUP = [P["coral"], P["kuning"], P["langit"], P["lavender"]]
+
+
+def _ilustrasi() -> str:
+    # Rak wadah porsi dengan tutup warna-warni + kalender Senin–Jumat dicentang (selalu di bawah teks).
     wadah = "".join(
-        f'<g transform="translate({60 + (i % 5) * 140},{40 + (i // 5) * 96})">'
-        f'<rect width="118" height="74" rx="12" fill="#0f2a20" stroke="#4fd1c5" stroke-width="3"/>'
-        f'<rect x="14" y="14" width="90" height="20" rx="4" fill="#b8f35c"/>'
-        f'<rect x="14" y="44" width="60" height="8" rx="4" fill="#4fd1c5" opacity=".7"/></g>'
+        f'<g transform="translate({70 + (i % 5) * 142},{30 + (i // 5) * 100})">'
+        f'<rect y="14" width="118" height="70" rx="16" fill="#ffffff" stroke="{TUTUP[(i + i // 5) % 4]}" stroke-width="4"/>'
+        f'<rect x="-4" y="2" width="126" height="22" rx="11" fill="{TUTUP[(i + i // 5) % 4]}"/>'
+        f'<rect x="20" y="40" width="78" height="14" rx="7" fill="{P["krem"]}" stroke="{P["garis"]}" stroke-width="2"/>'
+        f'<circle cx="44" cy="68" r="4" fill="{P["judul"]}"/><circle cx="74" cy="68" r="4" fill="{P["judul"]}"/>'
+        f'<path d="M50 74 q9 7 18 0" stroke="{P["judul"]}" stroke-width="3" fill="none" stroke-linecap="round"/></g>'
         for i in range(10))
     hari = "".join(
-        f'<g transform="translate({60 + i * 140},250)"><rect width="118" height="64" rx="10" fill="#0b1f18" '
-        f'stroke="#2d4a3e" stroke-width="2"/><text x="59" y="22" text-anchor="middle" font-size="16" '
-        f'fill="#a7bfb2" font-family="Inter">{d}</text><path d="M44 46 l9 9 l20 -20" stroke="#b8f35c" '
-        f'stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'
+        f'<g transform="translate({70 + i * 142},248)"><rect width="118" height="66" rx="16" fill="#ffffff" '
+        f'stroke="{P["garis"]}" stroke-width="3"/><text x="59" y="24" text-anchor="middle" font-size="17" font-weight="800" '
+        f'fill="{P["redup"]}" font-family="Nunito, Inter, sans-serif">{d}</text><path d="M44 44 l10 10 l20 -20" stroke="{P["coral"]}" '
+        f'stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'
         for i, d in enumerate(["Sen", "Sel", "Rab", "Kam", "Jum"]))
-    return f"""<!doctype html><html><head><meta charset="utf-8"><style>
+    return f'<svg width="850" height="330" viewBox="0 0 850 330">{wadah}{hari}</svg>'
+
+
+def html_sampul(subjudul: str, pil: list[str], tahun: int) -> str:
+    warna_pil = [(P["peach"], P["aksen"]), (P["langit_muda"], P["aksen2"]), (P["kuning_muda"], P["peringatan"])]
+    pills = "".join(
+        f'<span class="pill" style="background:{bg};color:{fg};border-color:{fg}33">{_h.escape(p)}</span>'
+        for p, (bg, fg) in zip(pil, warna_pil * 2))
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>{font_css()}
 *{{box-sizing:border-box;margin:0;padding:0}}
-body{{width:850px;height:1100px;overflow:hidden;font-family:Inter,'DejaVu Sans',sans-serif;color:#eaf5ee;
-background:radial-gradient(circle at 75% 18%,rgba(184,243,92,.18),transparent 45%),
-radial-gradient(circle at 10% 90%,rgba(79,209,197,.16),transparent 50%),#07130f;position:relative}}
-.grid{{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:50px 50px}}
-.isi{{position:absolute;left:70px;right:70px;top:80px}}
-.tag{{font-size:20px;font-weight:700;letter-spacing:.18em;color:#4fd1c5}}
-h1{{font-size:150px;line-height:.95;font-weight:900;color:#b8f35c;margin-top:26px;letter-spacing:-.02em}}
-h2{{font-size:84px;line-height:1;font-weight:900;color:#ffffff;letter-spacing:-.01em}}
-.sub{{font-size:31px;line-height:1.3;font-weight:600;margin-top:30px;color:#eaf5ee;max-width:690px}}
-.pills{{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}}
-.pill{{font-size:21px;font-weight:700;padding:11px 20px;border-radius:999px;border:2px solid #4fd1c5;color:#dffaf6;
-background:rgba(79,209,197,.08)}}
-svg{{position:absolute;left:0;bottom:120px}}
-.kaki{{position:absolute;left:70px;right:70px;bottom:46px;display:flex;justify-content:space-between;font-size:22px;
-font-weight:700;color:#a7bfb2}}
-.kaki b{{color:#b8f35c}}
-</style></head><body><div class="grid"></div>
+body{{width:850px;height:1100px;overflow:hidden;font-family:Nunito,Inter,sans-serif;color:{P['teks']};
+background:{P['krem']};position:relative}}
+.blob{{position:absolute;border-radius:50%}}
+.titik{{position:absolute;inset:0;background-image:radial-gradient({P['garis']} 2px,transparent 2.5px);background-size:34px 34px;opacity:.7}}
+.isi{{position:absolute;left:70px;right:70px;top:78px}}
+.tag{{display:inline-block;font-size:19px;font-weight:900;letter-spacing:.14em;color:#fff;background:{P['aksen2']};
+padding:8px 16px;border-radius:999px}}
+h1{{font-size:168px;line-height:.95;font-weight:900;color:#e2553a;margin-top:26px;letter-spacing:-.01em}}
+h2{{font-size:88px;line-height:1;font-weight:900;color:{P['judul']}}}
+.sub{{font-size:31px;line-height:1.3;font-weight:800;margin-top:28px;color:{P['teks']};max-width:700px}}
+.pills{{margin-top:30px;display:flex;flex-wrap:wrap;gap:14px}}
+.pill{{font-size:22px;font-weight:800;padding:11px 22px;border-radius:999px;border:2px solid}}
+svg{{position:absolute;left:0;bottom:118px}}
+.kaki{{position:absolute;left:70px;right:70px;bottom:46px;display:flex;justify-content:space-between;font-size:23px;
+font-weight:800;color:{P['redup']}}}
+.kaki b{{color:{P['aksen']}}}
+</style></head><body><div class="titik"></div>
+<div class="blob" style="width:420px;height:420px;right:-140px;top:-120px;background:{P['peach']}"></div>
+<div class="blob" style="width:170px;height:170px;right:70px;top:220px;background:{P['kuning_muda']}"></div>
+<div class="blob" style="width:300px;height:300px;left:-130px;bottom:300px;background:{P['langit_muda']}"></div>
+<div class="blob" style="width:120px;height:120px;right:110px;bottom:470px;background:{P['lavender_muda']}"></div>
 <div class="isi"><div class="tag">EBOOK + KIT PRINTABLE · USIA 6–23 BULAN</div>
 <h1>MPASI</h1><h2>IBU BEKERJA</h2>
 <div class="sub">{_h.escape(subjudul)}</div><div class="pills">{pills}</div></div>
-<svg width="850" height="330" viewBox="0 0 850 330">{wadah}{hari}</svg>
+{_ilustrasi()}
 <div class="kaki"><span>Edisi {tahun}</span><b>GoSatSet.xyz</b></div></body></html>"""
 
 
@@ -54,8 +71,12 @@ def buat_png(html: str, keluar: Path, skala: int) -> Path:
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": 850, "height": 1100}, device_scale_factor=skala)
-        pg.set_content(html, wait_until="networkidle")
+        # Dari file, bukan set_content: halaman about:blank tidak boleh memuat font file://.
+        tmp = keluar.parent / f"_{keluar.stem}.html"
+        tmp.write_text(html, encoding="utf-8")
+        pg.goto(tmp.as_uri(), wait_until="networkidle")
         pg.evaluate("document.fonts.ready")
         pg.screenshot(path=str(keluar), full_page=False)
         b.close()
+    tmp.unlink()
     return keluar

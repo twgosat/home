@@ -283,4 +283,4 @@ Dieksekusi 18 Okt 2026 bersama skill ebook-pro. 49 tes lulus. Output ada di `ebo
 9. **Menu minggu 2 dan 4:** validator menangkap 125 menit (membuang duri ikan kembung). Ubi dihapus dan diganti bubur, sehingga totalnya 120 menit. Estimasi menit tidak dikurangi.
 10. **Modul tambahan:** `ebook/kartu.py` (dipisah dari render.py), `ebook/sampul.py`, `ebook/promo.py`, `ebook/verifikasi.py`. `teks_wa` menerima `data` agar target porsi ikut tercantum.
 11. **TDD:** tes `uji_masak` dan `naskah` ditulis bersamaan dengan implementasinya, tidak dijalankan gagal lebih dulu. Semua modul lain mengikuti urutan gagal → lulus.
-
+12. **Tema warna diganti (permintaan Bang Emteio, 18 Okt 2026):** dari hijau ke nuansa anak dan parenting, yaitu coral, kuning, biru langit, dan lavender, dengan font judul Nunito (OFL, disimpan di `templates/fonts/`). Palet dipusatkan di `ebook/tema.py` dan diuji di `tests/test_tema.py` (tanpa hijau, kontras ≥ 4,5). Sampul dan banner kini berlatar krem terang. Dua paragraf Bab 4 diringkas agar tidak ada halaman yang hanya berisi satu baris. Ebook tetap 43 halaman.

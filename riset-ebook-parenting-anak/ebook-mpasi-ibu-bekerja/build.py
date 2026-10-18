@@ -23,6 +23,7 @@ from ebook.pdf import gabung_pdf, html_ke_pdf, rakit_ebook
 from ebook.promo import render_banners
 from ebook.render import fakta_html, ref, render_bab
 from ebook.sampul import buat_png, html_sampul
+from ebook.tema import font_css
 from ebook.uji_masak import Klaim, klaim_waktu
 from ebook.verifikasi import tulis_verifikasi
 
@@ -180,7 +181,7 @@ Bila anak sakit, berat badannya tidak naik, atau ada dugaan alergi, periksakan k
 <p>Semoga dapur hari Minggu jadi lebih tenang, dan pengasuh di rumah lebih percaya diri.</p>
 <p class="url">www.GoSatSet.xyz</p><p class="kecil">© {TAHUN} www.GoSatSet.xyz · Seluruh angka bersumber; lihat Referensi.</p></section>"""
     css = (root / "templates" / "ebook.css").read_text(encoding="utf-8")
-    html = (f"<!doctype html><html lang='id'><head><meta charset='utf-8'><title>{JUDUL}</title><style>{css}</style>"
+    html = (f"<!doctype html><html lang='id'><head><meta charset='utf-8'><title>{JUDUL}</title><style>{font_css()}{css}</style>"
             f"</head><body>{depan}{''.join(isi)}{penutup}</body></html>")
     return html, bagian_bab, babs
 
@@ -189,7 +190,7 @@ Bila anak sakit, berat badannya tidak naik, atau ada dugaan alergi, periksakan k
 def _dok(root: Path, isi: str, ekstra_css: str = "") -> str:
     css = (root / "templates" / "kartu.css").read_text(encoding="utf-8")
     ebook_css = (root / "templates" / "ebook.css").read_text(encoding="utf-8")
-    return (f"<!doctype html><html lang='id'><head><meta charset='utf-8'><style>{ebook_css}\n{css}\n{ekstra_css}"
+    return (f"<!doctype html><html lang='id'><head><meta charset='utf-8'><style>{font_css()}{ebook_css}\n{css}\n{ekstra_css}"
             f"</style></head><body>{isi}</body></html>")
 
 

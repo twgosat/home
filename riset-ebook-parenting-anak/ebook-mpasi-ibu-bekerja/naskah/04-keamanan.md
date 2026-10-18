@@ -28,9 +28,11 @@ Sumber: WHO Five Keys to Safer Food [@S06].
 | Daging, ayam, ikan, telur | {{fakta.simpan.hewani_kulkas_hari}} | {{fakta.simpan.freezer_hari}} |
 | Bubur, nasi tim, kentang, ubi | {{nilai.simpan.hewani_kulkas_hari}} (pilihan konservatif buku ini) | {{nilai.simpan.freezer_hari}} |
 
-Batas kulkas dan freezer di atas adalah angka American Academy of Pediatrics yang dikutip bersama panduan IDAI. IDAI sendiri menekankan suhu kulkas di bawah batas aman dan tidak menyebut lama simpan [@S05]. Untuk karbohidrat matang, sumber tidak memberi batas tersendiri, jadi buku ini memakai batas yang sama dengan bahan hewani.
+Batas kulkas dan freezer di atas adalah angka American Academy of Pediatrics yang dikutip bersama panduan IDAI. IDAI sendiri menekankan suhu kulkas di bawah batas aman dan tidak menyebut lama simpan [@S05]. Karbohidrat matang tidak diberi batas tersendiri oleh sumber, jadi buku ini memakai batas bahan hewani.
 
 {{konflik.simpan.freezer_hari}}
+
+> **Tips penulis:** Susun freezer dengan pola "yang lama di depan". Stok minggu ini diletakkan di belakang stok yang tersisa dari minggu lalu, supaya yang lebih tua terpakai lebih dulu.
 
 ## Tiga aturan saat menyajikan
 
@@ -42,6 +44,4 @@ Batas kulkas dan freezer di atas adalah angka American Academy of Pediatrics yan
 
 ## Label: aturan kecil yang menyelamatkan
 
-Setiap wadah diberi label berisi isi, usia, tanggal masak, dan tanggal "pakai sebelum". Lembar label siap cetak ada di Kit Cetak A4. Dengan label, pengasuh tidak perlu mengingat kapan sesuatu dimasak, cukup membaca tanggalnya.
-
-> **Tips penulis:** Susun freezer dengan pola "yang lama di depan". Stok minggu ini diletakkan di belakang stok yang tersisa dari minggu lalu, supaya yang lebih tua terpakai lebih dulu.
+Setiap wadah diberi label: isi, usia, tanggal masak, dan "pakai sebelum" (lembar siap cetak ada di Kit Cetak A4). Pengasuh cukup membaca tanggalnya, tidak perlu mengingat.

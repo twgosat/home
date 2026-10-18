@@ -8,7 +8,7 @@ Ebook PDF dan kit printable untuk orang tua bekerja dengan anak 6–23 bulan yan
 
 ```bash
 pip install -r requirements.txt     # butuh Chromium Playwright (sudah ada di /opt/pw-browsers pada sesi cloud)
-python -m pytest -q                 # 49 tes
+python -m pytest -q                 # 54 tes
 python build.py                     # semua output ke dist/
 python build.py --hanya lead-magnet # kartu | kit | lead-magnet | ebook
 ```
@@ -33,8 +33,12 @@ Salinan rilis v1 disimpan di `rilis/v1/`.
 | `data/` | `sumber.yaml`, `masalah.yaml` (P1–P10), `fakta.yaml`, `menu.yaml`, `uji-masak.csv` |
 | `naskah/` | 10 bab Markdown dengan front matter `masalah:` |
 | `ebook/` | `data`, `render`, `kartu`, `menu`, `naskah` (lint), `pdf`, `sampul`, `promo`, `uji_masak`, `verifikasi` |
-| `templates/` | `ebook.css` (Letter), `kartu.css` (A5, ≥ 14 pt) |
+| `templates/` | `ebook.css` (Letter), `kartu.css` (A5, ≥ 14 pt), `fonts/` (Nunito, lisensi OFL) |
 | `jualan/` | Paket produk, teks Lynk.id, lead magnet, lembar hasil validasi |
+
+## Tema warna
+
+Nuansa anak dan parenting: coral hangat, kuning cerah, biru langit, lavender di atas latar krem (sampul dan banner) atau putih (halaman isi). Judul memakai Nunito yang bulat. Semua warna ada di `ebook/tema.py`. `tests/test_tema.py` memastikan tidak ada warna hijau dan teks di atas putih memenuhi kontras WCAG AA (≥ 4,5).
 
 ## Klaim waktu "2 jam"
 
