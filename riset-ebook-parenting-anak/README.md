@@ -75,6 +75,8 @@ Bagian ini adalah kesimpulan yang ditarik dari data di atas, bukan data baru:
 
 ---
 
+> Analisis lanjutan berisi masalah yang belum tertangani dan 5 ide ebook pesaing ada di [`ide-produk-pesaing.md`](ide-produk-pesaing.md).
+
 ## 4. Metodologi & keterbatasan
 
 - **Metode:** sekitar 40 pencarian web (Indonesia dan Inggris) yang ditujukan ke daftar terlaris Gramedia Digital/Gramedia.com, halaman produk marketplace, Google Play Books, iPusnas, Lynk.id, Lemon8, dan media (IDN Times, Fimela, Kapanlagi, RRI).
