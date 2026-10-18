@@ -20,6 +20,7 @@ from ebook.kartu import (render_kartu, render_kartu_asi, render_label, render_lo
 from ebook.menu import cek_menu, daftar_belanja, total_menit
 from ebook.naskah import cek_naskah
 from ebook.pdf import gabung_pdf, html_ke_pdf, rakit_ebook
+from ebook.promo import render_banners
 from ebook.render import fakta_html, ref, render_bab
 from ebook.sampul import buat_png, html_sampul
 from ebook.uji_masak import Klaim, klaim_waktu
@@ -248,6 +249,9 @@ def bangun(root: Path = ROOT, keluar: Path | None = None, hanya: str | None = No
         for tujuan in (keluar / f"Verifikasi_{JUDUL}.md", root / "jualan" / f"Verifikasi_{JUDUL}.md"):
             tujuan.write_text(ver, encoding="utf-8")
         hasil["verifikasi"] = keluar / f"Verifikasi_{JUDUL}.md"
+        sampul_mockup = buat_png(sampul_html, keluar / "promo" / "_sampul-2x.png", 2)
+        hasil["banner"] = render_banners(sampul_mockup, {"halaman": info["halaman"], "bab": len(bab) - 2,
+                                                         "sumber": len(data.sumber)}, keluar / "promo")  # type: ignore[assignment]
     return hasil
 
 

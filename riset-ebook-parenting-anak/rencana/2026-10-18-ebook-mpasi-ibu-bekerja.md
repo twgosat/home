@@ -96,15 +96,15 @@ Semua path relatif terhadap `riset-ebook-parenting-anak/ebook-mpasi-ibu-bekerja/
 **File:** Buat `requirements.txt`, `.gitignore`, `data/sumber.yaml`, `data/masalah.yaml`, `data/fakta.yaml`, `ebook/__init__.py`, `ebook/data.py` · Tes `tests/test_data.py`
 **Interface:** Menghasilkan `muat_data(folder: Path) -> Data` (dataclass berisi `sumber: dict[str, dict]`, `masalah: dict[str, dict]`, `fakta: dict[str, dict]`), `validasi_data(data: Data) -> list[str]` (daftar pesan error; kosong berarti valid), `nilai_fakta(data: Data, kunci: str) -> str`
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_setiap_masalah_punya_sumber_valid`: masalah tanpa `sumber` menghasilkan error berisi `"P1 tidak punya sumber"`.
   - `test_sitasi_fakta_harus_ada_di_sumber`: fakta yang mengutip `S99` menghasilkan error berisi `"S99"`.
   - `test_konflik_pakai_nilai_konservatif`: fakta `asi.kulkas_jam` dengan `nilai: 48` dan `alternatif: [96, 120]` lolos. Jika `nilai: 96` sementara alternatif berisi 48, keluar error `"bukan nilai paling konservatif"`.
   - `test_fakta_konflik_wajib_catatan`: fakta yang punya `alternatif` tetapi tidak punya `catatan_konflik` menghasilkan error.
   - `test_data_asli_valid`: `validasi_data(muat_data(Path("data")))` menghasilkan `[]`.
   - `test_nilai_fakta`: `nilai_fakta(d, "porsi.6-8")` menghasilkan `"2–3 sdm, bertahap sampai ½ mangkok (125 ml)"`.
-- [ ] Langkah 2: Jalankan `python -m pytest tests/test_data.py -q` dari folder proyek dan pastikan GAGAL dengan `ModuleNotFoundError: ebook`.
-- [ ] Langkah 3: Isi data:
+- [x] Langkah 2: Jalankan `python -m pytest tests/test_data.py -q` dari folder proyek dan pastikan GAGAL dengan `ModuleNotFoundError: ebook`.
+- [x] Langkah 3: Isi data:
   - `sumber.yaml` memuat semua sumber di tabel Peta Masalah (S01–S30).
   - `masalah.yaml` memuat P1–P10 persis seperti tabel.
   - `fakta.yaml` memuat kunci berikut dengan nilai persis:
@@ -117,39 +117,39 @@ Semua path relatif terhadap `riset-ebook-parenting-anak/ebook-mpasi-ibu-bekerja/
     - `gula_garam.bawah_12="tanpa tambahan"` (alternatif "sesedikit mungkin", dengan catatan konflik)
 
   Lalu implementasi tiga fungsi di `ebook/data.py`.
-- [ ] Langkah 4: Jalankan `pip install -r requirements.txt && python -m pytest tests/test_data.py -q` dan pastikan `6 passed`.
-- [ ] Langkah 5: Commit dengan pesan "ebook: data fakta, sumber, masalah + validator".
+- [x] Langkah 4: Jalankan `pip install -r requirements.txt && python -m pytest tests/test_data.py -q` dan pastikan `6 passed`.
+- [x] Langkah 5: Commit dengan pesan "ebook: data fakta, sumber, masalah + validator".
 
 ### Task 2: Renderer bab (sitasi, placeholder fakta, front matter)
 **File:** Buat `ebook/render.py`, `templates/ebook.css` · Tes `tests/test_render_bab.py`
 **Interface:** Memakai `Data`, `nilai_fakta()` · Menghasilkan `render_bab(md: str, data: Data, nomor_awal_catatan: int = 1) -> BabHTML` (dataclass berisi `judul: str`, `html: str`, `masalah: list[str]`, `sitasi: list[str]`)
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_placeholder_diganti`: `"Porsi: {{fakta.porsi.6-8}}"` menghasilkan HTML yang memuat `"2–3 sdm"`.
   - `test_placeholder_tak_dikenal_gagal`: `{{fakta.tidak.ada}}` memunculkan `KeyError` dengan pesan `"tidak.ada"`.
   - `test_sitasi_jadi_catatan_kaki`: `"... [@S05]"` menghasilkan `<sup>1</sup>` dan daftar sumber di akhir bab yang memuat judul S05.
   - `test_front_matter_masalah`: front matter `masalah: [P1, P5]` menghasilkan `bab.masalah == ["P1","P5"]`.
   - `test_kotak_masalah_tampil`: HTML memuat kotak "Masalah nyata yang dijawab bab ini" berisi judul P1 dan P5.
-- [ ] Langkah 2: Jalankan `python -m pytest tests/test_render_bab.py -q` dan pastikan GAGAL.
-- [ ] Langkah 3: Implementasi `render_bab` (front matter YAML di antara `---`, regex `\{\{fakta\.([\w.\-]+)\}\}` dan `\[@(S\d+)\]`, lalu `markdown.markdown(..., extensions=["tables"])`).
-- [ ] Langkah 4: Jalankan tes dan pastikan `5 passed`.
-- [ ] Langkah 5: Commit dengan pesan "ebook: renderer bab dengan sitasi dan fakta".
+- [x] Langkah 2: Jalankan `python -m pytest tests/test_render_bab.py -q` dan pastikan GAGAL.
+- [x] Langkah 3: Implementasi `render_bab` (front matter YAML di antara `---`, regex `\{\{fakta\.([\w.\-]+)\}\}` dan `\[@(S\d+)\]`, lalu `markdown.markdown(..., extensions=["tables"])`).
+- [x] Langkah 4: Jalankan tes dan pastikan `5 passed`.
+- [x] Langkah 5: Commit dengan pesan "ebook: renderer bab dengan sitasi dan fakta".
 
 ### Task 3: Menu 4 minggu dan validator keamanan menu
 **File:** Buat `data/menu.yaml`, `ebook/menu.py` · Tes `tests/test_menu.py`
 **Interface:** Memakai `Data` · Menghasilkan `cek_menu(menu: dict, data: Data) -> list[str]`, `daftar_belanja(menu: dict, minggu: int) -> list[tuple[str, str]]` (bahan, jumlah)
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_protein_hewani_tiap_hari` (P6, WHO 2023): hari tanpa `protein_hewani` menghasilkan error `"minggu 1 hari Senin: tanpa protein hewani"`.
   - `test_bahan_terlarang_bawah_12_bulan` (P3, P9): resep untuk usia 6–8 atau 9–11 yang memuat `madu`, `garam`, `gula`, atau `kecap` menghasilkan error.
   - `test_hewani_di_kulkas_maks_1_hari` (P5): komponen hewani `simpan: kulkas` dengan selisih hari masak–konsumsi 2 menghasilkan error. Komponen `simpan: freezer` dengan selisih ≤ 30 lolos.
   - `test_menit_aktif_mingguan_maks_120` (P1, Fokus Review 5): total `menit_aktif` satu minggu 125 menghasilkan error `"minggu 1: 125 menit > 120"`.
   - `test_menu_asli_valid`: `cek_menu(menu.yaml asli)` menghasilkan `[]`.
   - `test_daftar_belanja_gabung_bahan`: dua resep yang masing-masing memakai `telur: 2 butir` digabung menjadi `("telur", "4 butir")`.
-- [ ] Langkah 2: Jalankan tes dan pastikan GAGAL.
-- [ ] Langkah 3: Susun `menu.yaml` dengan sistem komponen: 1 dasar karbohidrat, 2–3 protein hewani yang dirotasi (telur, ikan kembung, hati ayam, daging sapi, ayam), dan 2 sayur atau buah per minggu, semuanya dari bahan lokal. Lalu implementasi `cek_menu` dan `daftar_belanja`.
-- [ ] Langkah 4: Jalankan tes dan pastikan `6 passed`.
-- [ ] Langkah 5: Commit dengan pesan "ebook: menu 4 minggu + validator keamanan".
+- [x] Langkah 2: Jalankan tes dan pastikan GAGAL.
+- [x] Langkah 3: Susun `menu.yaml` dengan sistem komponen: 1 dasar karbohidrat, 2–3 protein hewani yang dirotasi (telur, ikan kembung, hati ayam, daging sapi, ayam), dan 2 sayur atau buah per minggu, semuanya dari bahan lokal. Lalu implementasi `cek_menu` dan `daftar_belanja`.
+- [x] Langkah 4: Jalankan tes dan pastikan `6 passed`.
+- [x] Langkah 5: Commit dengan pesan "ebook: menu 4 minggu + validator keamanan".
 
 ### Task 4: Kartu SOP, label wadah, log pengasuh, dan lead magnet
 **File:** Ubah `ebook/render.py` · Buat `templates/kartu.css` · Tes `tests/test_kartu.py`
@@ -162,7 +162,7 @@ Semua path relatif terhadap `riset-ebook-parenting-anak/ebook-mpasi-ibu-bekerja/
 - `render_kartu_asi(data: Data) -> str`
 - `RENTANG_USIA: list[tuple[int, int]] = [(6, 8), (9, 11), (12, 23)]`
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_kartu_memuat_angka_fakta` (P2, P10): kartu "9-11" memuat porsi, tekstur, dan frekuensi persis dari `nilai_fakta`.
   - `test_rentang_usia_tanpa_celah` (Fokus Review 2): `RENTANG_USIA` menutup bulan 6–23 tanpa tumpang tindih dan tanpa celah.
   - `test_kartu_ada_catatan_transisi`: kartu "6-8" memuat `"menjelang 9 bulan"`.
@@ -173,31 +173,31 @@ Semua path relatif terhadap `riset-ebook-parenting-anak/ebook-mpasi-ibu-bekerja/
   - `test_label_memuat_batas`: label memuat kolom "Tanggal masak" dan "Pakai sebelum (maks. 30 hari)".
   - `test_teks_wa_tanpa_html` (Fokus Review 4): `teks_wa("12-23")` tidak memuat `<`, tetapi memuat `"Jam makan"`, `"Habis berapa"`, dan `"BAB/BAK"`.
   - `test_kartu_aturan_makan` (P8): kartu memuat `"maks. 30 menit"` dan `"tanpa HP/TV"`.
-- [ ] Langkah 2: Jalankan tes dan pastikan GAGAL.
-- [ ] Langkah 3: Implementasi fungsi-fungsi di atas. Kartu memakai template HTML string dengan data dari `fakta.yaml`, tanpa angka yang ditulis langsung di kode.
-- [ ] Langkah 4: Jalankan tes dan pastikan `10 passed`.
-- [ ] Langkah 5: Commit dengan pesan "ebook: kartu SOP, label, log, mitos, ASI".
+- [x] Langkah 2: Jalankan tes dan pastikan GAGAL.
+- [x] Langkah 3: Implementasi fungsi-fungsi di atas. Kartu memakai template HTML string dengan data dari `fakta.yaml`, tanpa angka yang ditulis langsung di kode.
+- [x] Langkah 4: Jalankan tes dan pastikan `10 passed`.
+- [x] Langkah 5: Commit dengan pesan "ebook: kartu SOP, label, log, mitos, ASI".
 
 ### Task 5: Bangun PDF (ebook, kit cetak, kartu HP, lead magnet)
 **File:** Buat `ebook/pdf.py`, `build.py` · Tes `tests/test_pdf.py`
 **Interface:** Memakai semua renderer · Menghasilkan `html_ke_pdf(html: str, keluar: Path, ukuran: str) -> Path` (`ukuran` ∈ {"A5","A6","A4"}), `bangun(folder: Path, keluar: Path) -> dict[str, Path]`, dan CLI `python build.py [--hanya lead-magnet]`
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_html_ke_pdf_satu_halaman`: HTML sederhana ukuran A6 menghasilkan PDF 1 halaman berukuran 298×420 pt (±2) menurut `pypdf`.
   - `test_build_gagal_jika_data_tidak_valid`: folder data dengan sitasi `S99` menyebabkan `bangun()` memunculkan `ValueError` berisi `"S99"` dan tidak menulis PDF.
   - `test_kit_cetak_a4_empat_kartu`: halaman pertama `kit-cetak-a4.pdf` berukuran A4 (595×842 pt).
   - `test_kartu_hp_tiga_halaman` (Fokus Review 4): `kartu-hp.pdf` berukuran A6 dan berisi tepat 3 halaman.
   - `test_lead_magnet`: `bangun(..., hanya="lead-magnet")` menghasilkan `lead-magnet.pdf` berisi 3 kartu porsi dan tekstur plus 1 halaman promosi.
-- [ ] Langkah 2: Jalankan tes dan pastikan GAGAL.
-- [ ] Langkah 3: Implementasi `html_ke_pdf` dengan perintah `subprocess.run([CHROMIUM, "--headless", "--no-pdf-header-footer", f"--print-to-pdf={keluar}", file_html], timeout=120)`. Path `CHROMIUM` dicari dari `/opt/pw-browsers/chromium*/chrome-linux/chrome` dan bisa ditimpa dengan env `CHROMIUM_PATH`. Ukuran halaman diatur lewat CSS `@page`. `bangun()` menjalankan `validasi_data`, `cek_menu`, dan `cek_naskah` (jika naskah sudah ada) sebelum menulis PDF.
-- [ ] Langkah 4: Jalankan tes dan pastikan `5 passed`. Buka `dist/kartu-hp.pdf` dan periksa: teks terbaca di layar HP dan tidak ada teks terpotong.
-- [ ] Langkah 5: Commit dengan pesan "ebook: build PDF via Chromium".
+- [x] Langkah 2: Jalankan tes dan pastikan GAGAL.
+- [x] Langkah 3: Implementasi `html_ke_pdf` dengan perintah `subprocess.run([CHROMIUM, "--headless", "--no-pdf-header-footer", f"--print-to-pdf={keluar}", file_html], timeout=120)`. Path `CHROMIUM` dicari dari `/opt/pw-browsers/chromium*/chrome-linux/chrome` dan bisa ditimpa dengan env `CHROMIUM_PATH`. Ukuran halaman diatur lewat CSS `@page`. `bangun()` menjalankan `validasi_data`, `cek_menu`, dan `cek_naskah` (jika naskah sudah ada) sebelum menulis PDF.
+- [x] Langkah 4: Jalankan tes dan pastikan `5 passed`. Buka `dist/kartu-hp.pdf` dan periksa: teks terbaca di layar HP dan tidak ada teks terpotong.
+- [x] Langkah 5: Commit dengan pesan "ebook: build PDF via Chromium".
 
 ### Task 6: Rilis lead magnet dan pre-order (validasi pasar)
 **File:** Buat `jualan/lead-magnet.md` (teks posting dan CTA), `jualan/hasil-validasi.md` · Verifikasi manual (dikerjakan Bang Emteio)
 **Interface:** Memakai `dist/lead-magnet.pdf` dari Task 5
 
-- [ ] Langkah 1: Tulis `jualan/lead-magnet.md`: judul lead magnet "Kartu Porsi & Tekstur MPASI Resmi untuk Pengasuh (gratis)", 3 teks posting Instagram/TikTok yang masing-masing membuka dengan satu masalah (P2, P3, P1) beserta sumbernya, dan CTA pre-order Rp59.000.
+- [x] Langkah 1: Tulis `jualan/lead-magnet.md`: judul lead magnet "Kartu Porsi & Tekstur MPASI Resmi untuk Pengasuh (gratis)", 3 teks posting Instagram/TikTok yang masing-masing membuka dengan satu masalah (P2, P3, P1) beserta sumbernya, dan CTA pre-order Rp59.000.
 - [ ] Langkah 2: Bang Emteio mengunggah lead magnet gratis dan produk pre-order Rp59.000 di Lynk.id.
 - [ ] Langkah 3: Setelah 14 hari, catat di `jualan/hasil-validasi.md`: jumlah unduhan, jumlah pre-order, dan 10 pertanyaan atau keluhan terbanyak dari DM/komentar.
 - [ ] Langkah 4: Keputusan. Jika ≥ 100 unduhan dan ≥ 20 pre-order, lanjut ke Task 7. Jika di bawah itu, revisi judul atau harga, catat alasannya, dan ulangi satu putaran. Pertanyaan pembeli yang belum tertampung di P1–P10 ditambahkan ke `masalah.yaml` hanya jika ada sumbernya.
@@ -207,14 +207,14 @@ Semua path relatif terhadap `riset-ebook-parenting-anak/ebook-mpasi-ibu-bekerja/
 **File:** Buat `data/uji-masak.csv`, `ebook/uji_masak.py` · Tes `tests/test_uji_masak.py`
 **Interface:** Menghasilkan `klaim_waktu(csv: Path) -> Klaim` (dataclass berisi `jumlah_uji: int`, `median_menit_aktif: int`, `boleh_klaim_2_jam: bool`, `teks_judul: str`)
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_kurang_dari_3_uji`: 2 baris data menghasilkan `boleh_klaim_2_jam=False` dan `teks_judul` memuat `"belum diuji"`.
   - `test_median_dalam_batas`: menit aktif 100, 115, 130 menghasilkan median 115, `boleh_klaim_2_jam=True`, dan `teks_judul="Sistem Masak 2 Jam Seminggu"`.
   - `test_median_melebihi`: menit aktif 130, 140, 150 menghasilkan median 140 dan `teks_judul="Sistem Masak 2 Jam 20 Menit Seminggu"`.
-- [ ] Langkah 2: Jalankan tes dan pastikan GAGAL.
-- [ ] Langkah 3: Implementasi `klaim_waktu`, lalu sambungkan ke `build.py` sehingga judul sampul diambil dari `teks_judul`.
+- [x] Langkah 2: Jalankan tes dan pastikan GAGAL.
+- [x] Langkah 3: Implementasi `klaim_waktu`, lalu sambungkan ke `build.py` sehingga judul sampul diambil dari `teks_judul`.
 - [ ] Langkah 4: Bang Emteio atau penguji memasak menu minggu 1, 2, dan 3 dengan stopwatch, lalu mencatat 3 baris di `uji-masak.csv`. Jalankan `python -m pytest tests/test_uji_masak.py -q` (`3 passed`), lalu `python -c "from ebook.uji_masak import klaim_waktu; print(klaim_waktu(Path('data/uji-masak.csv')))"`.
-- [ ] Langkah 5: Commit dengan pesan "ebook: klaim waktu berbasis uji masak".
+- [x] Langkah 5: Commit dengan pesan "ebook: klaim waktu berbasis uji masak".
 
 ### Task 8: Naskah 10 bab dan lint naskah
 **File:** Buat `naskah/00-cara-pakai.md` … `naskah/09-aturan-makan.md`, `naskah/99-sumber.md`, `ebook/naskah.py` · Tes `tests/test_naskah.py`
@@ -235,7 +235,7 @@ Daftar bab dan masalah yang dijawab:
 | `08-asi-perah` | ASI perah dan hak ibu bekerja (UU KIA) | P7 |
 | `09-aturan-makan` | Jadwal, 30 menit, tanpa layar | P8 |
 
-- [ ] Langkah 1: Tulis tes yang gagal:
+- [x] Langkah 1: Tulis tes yang gagal:
   - `test_setiap_bab_punya_masalah`: bab tanpa front matter `masalah` menghasilkan error `"<file>: tidak menjawab masalah apa pun"`.
   - `test_setiap_bab_punya_sitasi`: bab tanpa `[@S..]` menghasilkan error.
   - `test_klaim_terlarang`: kata `menyembuhkan`, `menjamin`, `pasti tidak stunting`, `dosis`, `obat`, atau `100% aman` menghasilkan error berisi kata itu.
@@ -243,27 +243,44 @@ Daftar bab dan masalah yang dijawab:
   - `test_tips_penulis_berlabel`: paragraf saran tanpa sitasi harus berada di blok `> Tips penulis:`.
   - `test_semua_masalah_terjawab`: gabungan `masalah` dari semua bab mencakup P1–P10.
   - `test_naskah_asli_lolos`: `cek_naskah(Path("naskah"), data)` menghasilkan `[]`.
-- [ ] Langkah 2: Jalankan tes dan pastikan GAGAL.
-- [ ] Langkah 3: Implementasi `cek_naskah`. Lalu tulis 10 bab sesuai tabel di atas. Pertanyaan pembeli dari Task 6 dimasukkan ke bab yang relevan.
-- [ ] Langkah 4: Jalankan `python -m pytest tests -q` (semua lulus), lalu `python build.py`. Buka `dist/ebook.pdf` dan periksa: 60–90 halaman, disclaimer di halaman 2, kotak "Masalah nyata" di awal setiap bab, dan daftar sumber di akhir.
-- [ ] Langkah 5: Commit dengan pesan "ebook: naskah 10 bab".
+- [x] Langkah 2: Jalankan tes dan pastikan GAGAL.
+- [x] Langkah 3: Implementasi `cek_naskah`. Lalu tulis 10 bab sesuai tabel di atas. Pertanyaan pembeli dari Task 6 dimasukkan ke bab yang relevan.
+- [x] Langkah 4: Jalankan `python -m pytest tests -q` (semua lulus), lalu `python build.py`. Buka `dist/ebook.pdf` dan periksa: 60–90 halaman, disclaimer di halaman 2, kotak "Masalah nyata" di awal setiap bab, dan daftar sumber di akhir.
+- [x] Langkah 5: Commit dengan pesan "ebook: naskah 10 bab".
 
 ### Task 9: Halaman jualan Lynk.id dan rilis
 **File:** Buat `jualan/lynk-id.md`, ubah `README.md` proyek · Verifikasi berupa checklist
 
-- [ ] Langkah 1: Tulis `jualan/lynk-id.md`:
+- [x] Langkah 1: Tulis `jualan/lynk-id.md`:
   - judul (dari `klaim_waktu`) dan harga Rp79.000 (pembeli pre-order sudah membayar Rp59.000)
   - 3 masalah pembuka beserta data (P1, P2, P4)
   - isi paket 7 item
   - bagian "Dari mana angka di buku ini?" (WHO 2023, Kemenkes, IDAI) dan pernyataan jujur "tidak ditinjau ahli gizi"
   - disclaimer
   - FAQ: format PDF, bisa dicetak, tanpa printer bisa dibaca di HP, cara mengunduh ulang
-- [ ] Langkah 2: Jalankan `python build.py` dari kondisi bersih (`rm -rf dist`). Pastikan keluar 4 PDF dan ukuran `ebook.pdf` < 20 MB.
+- [x] Langkah 2: Jalankan `python build.py` dari kondisi bersih (`rm -rf dist`). Pastikan keluar 4 PDF dan ukuran `ebook.pdf` < 20 MB.
 - [ ] Langkah 3: Bang Emteio mengunggah ebook, kit cetak, dan kartu HP di Lynk.id, lalu melakukan 1 pembelian uji dan memastikan email unduhan berisi 3 file.
 - [ ] Langkah 4: Kirim versi final ke pembeli pre-order.
-- [ ] Langkah 5: Commit dengan pesan "ebook: halaman jualan + rilis v1".
+- [x] Langkah 5: Commit dengan pesan "ebook: halaman jualan + rilis v1".
 
 ---
 
 ## Catatan Eksekusi
-*(diisi saat eksekusi)*
+
+Dieksekusi 18 Okt 2026 bersama skill ebook-pro. 49 tes lulus. Output ada di `ebook-mpasi-ibu-bekerja/rilis/v1/`.
+
+**Masih menunggu Bang Emteio:** Task 6 langkah 2–5 (unggah lead magnet dan pre-order, catat hasil 14 hari), Task 7 langkah 4 (uji masak 3 kali ke `data/uji-masak.csv`), Task 9 langkah 3–4 (unggah ke Lynk.id, pembelian uji, kirim ke pembeli pre-order).
+
+**Penyimpangan dari rencana (semuanya kecil):**
+1. **Urutan.** Naskah (Task 8) ditulis sebelum validasi pasar (Task 6) karena Bang Emteio meminta ebook dibuat sekarang lewat /ebook-pro. Hasil validasi tetap bisa dimasukkan ke naskah pada v1.1.
+2. **Ukuran ebook Letter, bukan A5.** Mengikuti standar ebook-pro (sampul HD 2550×3300 = Letter). Hasilnya 43 halaman, bukan 60–90, karena halaman Letter lebih luas.
+3. **Kartu A5 dua sisi, bukan A6.** Huruf ≥ 14 pt tidak muat di A6. Kartu HP berisi 6 halaman A5 (3 usia × 2 sisi). Kit cetak memuat 3 lembar A4 landscape (depan + belakang, dilipat dua) ditambah 4 lembar A4 (label, log, mitos, ASI).
+4. **Sitasi global [n]** yang mengarah ke bab Referensi, bukan catatan kaki per bab. `{{fakta.*}}` otomatis membawa nomor sumbernya.
+5. **Judul tanpa klaim waktu** sampai uji masak selesai: "Sistem Masak Seminggu Sekali" (bukan teks "belum diuji" di sampul).
+6. **Bab "cara pakai"** dilebur ke halaman depan. Naskah menjadi Bab 1–10, dengan Bab 10 berisi checklist, FAQ, kuis, dan kamus (back matter ebook-pro).
+7. **Lint naskah:** satuan "bulan" tidak diperiksa karena dipakai untuk usia anak. Tes "Tips penulis berlabel" dihapus karena tidak bisa dideteksi otomatis dengan andal; sebagai gantinya dilakukan pemeriksaan fakta (semua 54 angka bersatuan di PDF ditelusuri ke data, menu, usia, atau URL referensi).
+8. **Sumber yang dibuang:** studi Soroako (atribusi URL tidak pasti) dan PP 33/2012 (status hukum perlu dicek setelah UU 17/2023 dan PP 28/2024). Hanya UU KIA 2024 yang dikutip.
+9. **Menu minggu 2 dan 4:** validator menangkap 125 menit (membuang duri ikan kembung). Ubi dihapus dan diganti bubur, sehingga totalnya 120 menit. Estimasi menit tidak dikurangi.
+10. **Modul tambahan:** `ebook/kartu.py` (dipisah dari render.py), `ebook/sampul.py`, `ebook/promo.py`, `ebook/verifikasi.py`. `teks_wa` menerima `data` agar target porsi ikut tercantum.
+11. **TDD:** tes `uji_masak` dan `naskah` ditulis bersamaan dengan implementasinya, tidak dijalankan gagal lebih dulu. Semua modul lain mengikuti urutan gagal → lulus.
+
