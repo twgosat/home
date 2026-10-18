@@ -1,0 +1,41 @@
+# Masalah nyata yang wajib dijawab. Setiap bab menyebut ID masalah di front matter.
+P1:
+  judul: "Ibu bekerja kekurangan waktu menyiapkan MPASI"
+  bukti: "Ibu mengaku kurang waktu membuat MP-ASI sendiri; kurangnya contoh resep praktis membuat ibu enggan memasak; lebih dari separuh perempuan usia kerja ada di angkatan kerja."
+  sumber: [S11, S13, S14]
+P2:
+  judul: "Porsi, frekuensi, dan tekstur paling sering salah saat anak diasuh orang lain"
+  bukti: "Aspek porsi, frekuensi, dan tekstur memiliki tingkat kesesuaian paling rendah; peneliti menyarankan ibu bekerja tetap memantau MPASI yang diberikan pengasuh pengganti."
+  sumber: [S12]
+P3:
+  judul: "Tekanan keluarga memberi MPASI terlalu dini dan mitos turun-temurun"
+  bukti: "Ibu mendapat tekanan keluarga untuk memberi MP-ASI lebih dini; bubur nasi dan bubur pisang diberikan saat acara syukuran; IDAI menolak makanan padat sebelum 6 bulan dan madu sebelum 1 tahun."
+  sumber: [S11, S19, S20]
+P4:
+  judul: "Nenek dan pengasuh makin sering jadi pengasuh utama, pola asuh bisa bertabrakan"
+  bukti: "Nenek sebagai pengasuh utama naik dari 0,8% (2000) ke 5,7% (2014); sekitar 14% anak tinggal bersama kakek-nenek; sekitar 75% keluarga memakai pengasuhan alternatif; pola asuh ibu otoriter dan nenek permisif berkontribusi pada perilaku bermasalah anak."
+  sumber: [S15, S16, S17, S18]
+P5:
+  judul: "Risiko keamanan pangan MPASI yang disimpan dan dihangatkan"
+  bukti: "Diare masih dialami balita (SKI 2023); IDAI meminta makanan disimpan di bawah 5°C; AAP memberi batas simpan kulkas dan freezer; WHO melarang mencairkan makanan beku di suhu ruang."
+  sumber: [S29, S05, S06, S07]
+P6:
+  judul: "Asupan protein hewani dan zat besi masih kurang"
+  bukti: "WHO 2023 menganjurkan daging, ikan, atau telur setiap hari; sekitar sepertiga baduta belum cukup protein hewani; anemia balita 0–4 tahun 23,8%."
+  sumber: [S01, S02, S21, S22]
+P7:
+  judul: "Ibu bekerja harus mengelola ASI perah"
+  bukti: "WHO menganjurkan menyusui dilanjutkan sampai 2 tahun atau lebih; Kemenkes memberi batas simpan ASI perah; UU KIA 2024 mengatur cuti dan hak laktasi saat jam kerja."
+  sumber: [S02, S08, S10]
+P8:
+  judul: "Anak makan sambil melihat layar atau tanpa jadwal"
+  bukti: "Balita yang makan sambil menonton gawai makan lebih sedikit buah dan sayur; 37,02% anak usia 1–4 tahun sudah memakai HP; aturan makan menganjurkan jadwal, durasi maksimal 30 menit, dan tanpa distraksi."
+  sumber: [S23, S24, S25]
+P9:
+  judul: "Kebingungan soal gula dan garam untuk bayi"
+  bukti: "Media mengutip IDAI: boleh sesedikit mungkin; sumber lain: tanpa tambahan di bawah 1 tahun; WHO 2023: hindari makanan dan minuman tinggi gula dan garam."
+  sumber: [S27, S28, S02]
+P10:
+  judul: "Orang tua dan pengasuh tidak tahu takaran resmi"
+  bukti: "Kemenkes 2023 menetapkan tekstur, frekuensi, dan porsi per kelompok usia 6–8, 9–11, dan 12–23 bulan."
+  sumber: [S03, S04]

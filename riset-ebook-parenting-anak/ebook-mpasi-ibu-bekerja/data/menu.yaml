@@ -1,0 +1,113 @@
+# Menu 4 minggu. Dimasak hari Minggu, dimakan Senin–Jumat (Senin = hari ke-1 setelah masak).
+# jenis: karbo | hewani | sayur | buah ; simpan: freezer | kulkas | segar
+# menit_aktif = estimasi penulis untuk kerja di dapur (bukan waktu menunggu panci). Klaim waktu
+# baru boleh dipakai di sampul setelah uji masak nyata (data/uji-masak.csv).
+# Jumlah bahan = perkiraan untuk 1 anak selama 5 hari. Tidak ada gula, garam, madu, kecap, atau penyedap.
+minggu:
+  - nomor: 1
+    tema: "Ayam, hati ayam, telur"
+    menit_persiapan: 20
+    menit_penutup: 35
+    komponen:
+      - {id: bubur, nama: "Bubur beras / nasi tim", jenis: karbo, bahan: {beras: [500, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Masak beras dengan air banyak sampai lembut. Untuk 6–8 bulan, haluskan; untuk 9–11 bulan, biarkan bertekstur."}
+      - {id: kentang, nama: "Kentang kukus", jenis: karbo, bahan: {kentang: [500, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus sampai empuk, lumatkan sesuai usia."}
+      - {id: ayam, nama: "Ayam suwir", jenis: hewani, bahan: {"ayam fillet": [300, g], "bawang putih": [2, siung]}, menit_aktif: 15, simpan: freezer,
+         cara: "Rebus ayam dengan bawang putih sampai matang, suwir halus atau cincang sesuai usia. Kaldunya dibekukan untuk memasak bubur."}
+      - {id: hati, nama: "Hati ayam kukus cincang", jenis: hewani, bahan: {"hati ayam": [150, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Cuci, kukus sampai matang (tidak ada bagian merah), cincang atau haluskan."}
+      - {id: telur, nama: "Telur kukus", jenis: hewani, bahan: {telur: [5, butir]}, menit_aktif: 10, simpan: freezer,
+         cara: "Kocok telur, kukus dalam wadah tahan panas sampai padat, potong sesuai usia."}
+      - {id: wortel, nama: "Wortel kukus", jenis: sayur, bahan: {wortel: [300, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus sampai empuk, haluskan atau cincang."}
+      - {id: bayam, nama: "Bayam rebus cincang", jenis: sayur, bahan: {bayam: [1, ikat]}, menit_aktif: 5, simpan: freezer,
+         cara: "Ambil daunnya, rebus sebentar, tiriskan, cincang halus."}
+      - {id: pisang, nama: "Pisang segar", jenis: buah, bahan: {pisang: [5, buah]}, menit_aktif: 0, simpan: segar,
+         cara: "Dikupas pengasuh saat selingan; dilumatkan untuk 6–8 bulan."}
+    hari:
+      - {hari: Senin, makan: [bubur, ayam, wortel, pisang]}
+      - {hari: Selasa, makan: [kentang, hati, bayam, pisang]}
+      - {hari: Rabu, makan: [bubur, telur, wortel, pisang]}
+      - {hari: Kamis, makan: [bubur, ayam, bayam, pisang]}
+      - {hari: Jumat, makan: [kentang, telur, hati, wortel, pisang]}
+
+  - nomor: 2
+    tema: "Ikan kembung, daging sapi, telur"
+    menit_persiapan: 20
+    menit_penutup: 35
+    komponen:
+      - {id: bubur, nama: "Bubur beras / nasi tim", jenis: karbo, bahan: {beras: [750, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Masak beras dengan air banyak sampai lembut, sesuaikan tekstur dengan usia."}
+      - {id: kembung, nama: "Ikan kembung kukus tanpa duri", jenis: hewani, bahan: {"ikan kembung": [3, ekor], jeruk nipis: [1, buah]}, menit_aktif: 20, simpan: freezer,
+         cara: "Bersihkan, lumuri air jeruk nipis, kukus sampai matang, buang semua duri dengan teliti, suwir halus."}
+      - {id: sapi, nama: "Daging sapi giling tumis air", jenis: hewani, bahan: {"daging sapi giling": [250, g], "bawang merah": [3, siung]}, menit_aktif: 15, simpan: freezer,
+         cara: "Masak daging giling dengan bawang merah dan sedikit air sampai matang dan tidak ada warna merah."}
+      - {id: telur, nama: "Telur kukus", jenis: hewani, bahan: {telur: [4, butir]}, menit_aktif: 10, simpan: freezer,
+         cara: "Kocok telur, kukus sampai padat, potong sesuai usia."}
+      - {id: labu, nama: "Labu kuning kukus", jenis: sayur, bahan: {"labu kuning": [400, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus, haluskan atau potong kecil."}
+      - {id: brokoli, nama: "Brokoli kukus cincang", jenis: sayur, bahan: {brokoli: [1, bonggol]}, menit_aktif: 5, simpan: freezer,
+         cara: "Potong kuntum, kukus sampai empuk, cincang."}
+      - {id: pepaya, nama: "Pepaya segar", jenis: buah, bahan: {pepaya: [1, buah kecil]}, menit_aktif: 0, simpan: segar,
+         cara: "Dipotong pengasuh saat selingan; dilumatkan untuk 6–8 bulan."}
+    hari:
+      - {hari: Senin, makan: [bubur, kembung, labu, pepaya]}
+      - {hari: Selasa, makan: [bubur, sapi, brokoli, pepaya]}
+      - {hari: Rabu, makan: [bubur, telur, labu, pepaya]}
+      - {hari: Kamis, makan: [bubur, kembung, brokoli, pepaya]}
+      - {hari: Jumat, makan: [bubur, sapi, telur, labu, pepaya]}
+
+  - nomor: 3
+    tema: "Ayam, ikan patin, telur"
+    menit_persiapan: 20
+    menit_penutup: 35
+    komponen:
+      - {id: bubur, nama: "Bubur beras / nasi tim", jenis: karbo, bahan: {beras: [500, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Masak beras dengan air banyak sampai lembut, sesuaikan tekstur dengan usia."}
+      - {id: kentang, nama: "Kentang kukus", jenis: karbo, bahan: {kentang: [500, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus sampai empuk, lumatkan sesuai usia."}
+      - {id: ayam, nama: "Ayam cincang kukus", jenis: hewani, bahan: {"ayam fillet": [300, g], "bawang putih": [2, siung]}, menit_aktif: 15, simpan: freezer,
+         cara: "Cincang ayam dengan bawang putih, kukus sampai matang merata."}
+      - {id: patin, nama: "Ikan patin kukus", jenis: hewani, bahan: {"fillet ikan patin": [300, g], jahe: [1, ruas]}, menit_aktif: 10, simpan: freezer,
+         cara: "Kukus fillet dengan irisan jahe sampai matang, periksa duri, suwir halus."}
+      - {id: telur, nama: "Telur kukus", jenis: hewani, bahan: {telur: [4, butir]}, menit_aktif: 10, simpan: freezer,
+         cara: "Kocok telur, kukus sampai padat, potong sesuai usia."}
+      - {id: labusiam, nama: "Labu siam kukus", jenis: sayur, bahan: {"labu siam": [2, buah]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus, haluskan atau cincang."}
+      - {id: buncis, nama: "Buncis rebus cincang", jenis: sayur, bahan: {buncis: [200, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Buang ujungnya, rebus sampai empuk, cincang halus."}
+      - {id: alpukat, nama: "Alpukat segar", jenis: buah, bahan: {alpukat: [3, buah]}, menit_aktif: 0, simpan: segar,
+         cara: "Dibelah pengasuh saat selingan, dikerok dan dilumatkan sesuai usia."}
+    hari:
+      - {hari: Senin, makan: [bubur, ayam, labusiam, alpukat]}
+      - {hari: Selasa, makan: [kentang, patin, buncis, alpukat]}
+      - {hari: Rabu, makan: [bubur, telur, labusiam, alpukat]}
+      - {hari: Kamis, makan: [bubur, patin, buncis, alpukat]}
+      - {hari: Jumat, makan: [kentang, ayam, telur, labusiam, alpukat]}
+
+  - nomor: 4
+    tema: "Daging sapi, hati ayam, ikan kembung"
+    menit_persiapan: 20
+    menit_penutup: 35
+    komponen:
+      - {id: bubur, nama: "Bubur beras / nasi tim", jenis: karbo, bahan: {beras: [750, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Masak beras dengan air banyak sampai lembut, sesuaikan tekstur dengan usia."}
+      - {id: sapi, nama: "Daging sapi giling tumis air", jenis: hewani, bahan: {"daging sapi giling": [250, g], "bawang merah": [3, siung]}, menit_aktif: 15, simpan: freezer,
+         cara: "Masak daging giling dengan bawang merah dan sedikit air sampai matang dan tidak ada warna merah."}
+      - {id: hati, nama: "Hati ayam kukus cincang", jenis: hewani, bahan: {"hati ayam": [150, g]}, menit_aktif: 10, simpan: freezer,
+         cara: "Cuci, kukus sampai matang (tidak ada bagian merah), cincang atau haluskan."}
+      - {id: kembung, nama: "Ikan kembung kukus tanpa duri", jenis: hewani, bahan: {"ikan kembung": [3, ekor], "jeruk nipis": [1, buah]}, menit_aktif: 20, simpan: freezer,
+         cara: "Bersihkan, lumuri air jeruk nipis, kukus sampai matang, buang semua duri dengan teliti, suwir halus."}
+      - {id: wortel, nama: "Wortel kukus", jenis: sayur, bahan: {wortel: [300, g]}, menit_aktif: 5, simpan: freezer,
+         cara: "Kupas, potong, kukus sampai empuk, haluskan atau cincang."}
+      - {id: bayam, nama: "Bayam rebus cincang", jenis: sayur, bahan: {bayam: [1, ikat]}, menit_aktif: 5, simpan: freezer,
+         cara: "Ambil daunnya, rebus sebentar, tiriskan, cincang halus."}
+      - {id: pisang, nama: "Pisang segar", jenis: buah, bahan: {pisang: [5, buah]}, menit_aktif: 0, simpan: segar,
+         cara: "Dikupas pengasuh saat selingan; dilumatkan untuk 6–8 bulan."}
+    hari:
+      - {hari: Senin, makan: [bubur, sapi, wortel, pisang]}
+      - {hari: Selasa, makan: [bubur, hati, bayam, pisang]}
+      - {hari: Rabu, makan: [bubur, kembung, wortel, pisang]}
+      - {hari: Kamis, makan: [bubur, sapi, bayam, pisang]}
+      - {hari: Jumat, makan: [bubur, kembung, hati, wortel, pisang]}

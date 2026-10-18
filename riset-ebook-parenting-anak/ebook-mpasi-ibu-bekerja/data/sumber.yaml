@@ -1,0 +1,226 @@
+# Daftar sumber. Nomor rujukan [n] di buku = urutan di file ini (S01 = [1]).
+# jenis: resmi | jurnal | media | data ; kekuatan: kuat | sedang | lemah
+S01:
+  judul: "WHO Guideline for complementary feeding of infants and young children 6–23 months of age"
+  penerbit: "World Health Organization"
+  tahun: 2023
+  url: "https://www.who.int/publications/i/item/9789240081864"
+  jenis: resmi
+  kekuatan: kuat
+S02:
+  judul: "WHO guideline for complementary feeding of infants and young children 6–23 months of age (ringkasan)"
+  penerbit: "Emergency Nutrition Network (Field Exchange 72)"
+  tahun: 2024
+  url: "https://ennonline.net/fex/72/who-guideline-for-complementary-feeding-of-infants-and-young-children"
+  jenis: jurnal
+  kekuatan: sedang
+S03:
+  judul: "Buku Resep Makanan Lokal Balita dan Ibu Hamil (tabel anjuran MPASI)"
+  penerbit: "Kementerian Kesehatan RI"
+  tahun: 2023
+  url: "https://pkmpati2.patikab.go.id/data_bansos/file/Buku_Resep_Makanan_Lokal_Balita_dan_Ibu_Hamil.pdf"
+  jenis: resmi
+  kekuatan: kuat
+S04:
+  judul: "Tinjauan pustaka MPASI (mengutip tabel Kemenkes 2023)"
+  penerbit: "Poltekkes Kemenkes Medan"
+  tahun: 2024
+  url: "https://repository.poltekkes-medan.ac.id/6324/3/BAB%20II.pdf"
+  jenis: jurnal
+  kekuatan: lemah
+S05:
+  judul: "Berapa Lama Waktu Penyimpanan MPASI di Kulkas Menurut Ikatan Dokter Anak?"
+  penerbit: "detikHealth (mengutip Panduan MPASI UKK IDAI dan American Academy of Pediatrics)"
+  tahun: 2025
+  url: "https://health.detik.com/berita-detikhealth/d-8009834/berapa-lama-waktu-penyimpanan-mpasi-di-kulkas-menurut-ikatan-dokter-anak"
+  jenis: media
+  kekuatan: sedang
+S06:
+  judul: "Five Keys to Safer Food"
+  penerbit: "World Health Organization"
+  tahun: 2006
+  url: "https://www.afro.who.int/sites/default/files/2017-06/fan_5keys_en%20%282%29.pdf"
+  jenis: resmi
+  kekuatan: kuat
+S07:
+  judul: "Keep Family Food Safe for Your Baby"
+  penerbit: "Government of Newfoundland and Labrador (Healthy Eating)"
+  tahun: 2024
+  url: "https://www.gov.nl.ca/healthyeating/baby/offering-healthy-foods/keep-family-food-safe-for-your-baby/"
+  jenis: resmi
+  kekuatan: kuat
+S08:
+  judul: "ASI Bertahan Berapa Jam? Ini Cara Menyimpan dan Mencairkan"
+  penerbit: "detikHealth (mengutip Kementerian Kesehatan RI)"
+  tahun: 2025
+  url: "https://health.detik.com/berita-detikhealth/d-7890338/asi-bertahan-berapa-jam-ini-cara-menyimpan-dan-mencairkan"
+  jenis: media
+  kekuatan: sedang
+S09:
+  judul: "Penyimpanan ASI Perah: Anti Ribet, Awet, dan Aman"
+  penerbit: "Halodoc"
+  tahun: 2025
+  url: "https://www.halodoc.com/artikel/penyimpanan-asi-perah-aman-awet-nutrisi-terjaga"
+  jenis: media
+  kekuatan: lemah
+S10:
+  judul: "DPR Sahkan RUU KIA, Ibu Bekerja Berhak Cuti Melahirkan Sampai 6 Bulan"
+  penerbit: "Kontan"
+  tahun: 2024
+  url: "https://nasional.kontan.co.id/news/dpr-sahkan-ruu-kia-ibu-bekerja-berhak-cuti-melahirkan-sampai-6-bulan"
+  jenis: media
+  kekuatan: sedang
+S11:
+  judul: "Kendala praktik pemberian MP-ASI pada ibu (studi kualitatif)"
+  penerbit: "Amerta Nutrition, Universitas Airlangga"
+  tahun: 2025
+  url: "https://e-journal.unair.ac.id/AMNT/article/download/63581/33994/437297"
+  jenis: jurnal
+  kekuatan: sedang
+S12:
+  judul: "Praktik pemberian MP-ASI pada ibu bekerja (kesimpulan penelitian)"
+  penerbit: "Poltekkes Kemenkes Yogyakarta"
+  tahun: 2025
+  url: "https://eprints.poltekkesjogja.ac.id/22990/7/Conclusion.pdf"
+  jenis: jurnal
+  kekuatan: lemah
+S13:
+  judul: "Pelatihan pembuatan MP-ASI berbasis pangan lokal bagi ibu bekerja"
+  penerbit: "Jurnal SEPAKAT, Institut Teknologi Kalimantan"
+  tahun: 2024
+  url: "https://journal.itk.ac.id/index.php/sepakat/article/view/574/267"
+  jenis: jurnal
+  kekuatan: lemah
+S14:
+  judul: "Tingkat Partisipasi Pekerja Perempuan Naik Tipis pada 2025 (data BPS Sakernas Agustus 2025)"
+  penerbit: "GoodStats"
+  tahun: 2025
+  url: "https://data.goodstats.id/statistic/tingkat-partisipasi-pekerja-perempuan-naik-tipis-pada-2025-pKHVM"
+  jenis: data
+  kekuatan: sedang
+S15:
+  judul: "Indonesia Childcare Demand Brief (analisis SAKERTI 1993–2014)"
+  penerbit: "Bank Dunia"
+  tahun: 2017
+  url: "https://documents1.worldbank.org/curated/en/145471496053832463/pdf/113927-BAHASA-INDONESIAN-PUBLIC-7-IndonesiaChildcareDemandBriefvBHS.pdf"
+  jenis: resmi
+  kekuatan: kuat
+S16:
+  judul: "Pengasuhan anak oleh kakek-nenek (mengutip data KPAI 2018)"
+  penerbit: "Universitas Diponegoro"
+  tahun: 2019
+  url: "https://eprints2.undip.ac.id/id/eprint/28828/2/BAB%201.pdf"
+  jenis: jurnal
+  kekuatan: lemah
+S17:
+  judul: "Pengasuhan ibu dan nenek terhadap perilaku anak usia 2–6 tahun (188 pasangan, Surabaya)"
+  penerbit: "Universitas Katolik Widya Mandala Surabaya"
+  tahun: 2020
+  url: "https://repositori.ukwms.ac.id/id/eprint/29730/1/Pengasuhan%20kakek%20nenek_Final.pdf"
+  jenis: jurnal
+  kekuatan: sedang
+S18:
+  judul: "Benarkah Banyak Daycare Tak Berizin? (data KemenPPPA)"
+  penerbit: "Republika"
+  tahun: 2026
+  url: "https://news.republika.co.id/berita/te5lh4393/benarkah-banyak-daycare-tak-berizin"
+  jenis: media
+  kekuatan: sedang
+S19:
+  judul: "Faktor budaya dan pemberian MP-ASI dini"
+  penerbit: "Jurnal Kesehatan Masyarakat, Universitas Malahayati"
+  tahun: 2025
+  url: "https://ejurnalmalahayati.ac.id/index.php/manuju/article/download/20161/Download%20Artikel"
+  jenis: jurnal
+  kekuatan: sedang
+S20:
+  judul: "Mitos dan Fakta Pisang Kerok untuk Bayi (mengutip IDAI)"
+  penerbit: "Popmama"
+  tahun: 2024
+  url: "https://www.popmama.com/baby/0-6-months/mitos-dan-fakta-pisang-kerok-untuk-bayi-00-gdrd1-gg9vlx/amp"
+  jenis: media
+  kekuatan: sedang
+S21:
+  judul: "1 dari 3 Bayi di Indonesia Kurang Makan Daging, Telur, dan Ikan (SEAMEO RECFON)"
+  penerbit: "Kompas"
+  tahun: 2024
+  url: "https://lestari.kompas.com/read/2024/01/30/100000386/1-dari-3-bayi-di-indonesia-kurang-makan-daging-telur-dan-ikan"
+  jenis: media
+  kekuatan: sedang
+S22:
+  judul: "Kemenkes: Hampir Seperempat Balita Kita Mengalami Anemia"
+  penerbit: "Metro TV News"
+  tahun: 2025
+  url: "https://www.metrotvnews.com/read/NP6C3PAA-kemenkes-hampir-seperempat-balita-kita-mengalami-anemia"
+  jenis: media
+  kekuatan: sedang
+S23:
+  judul: "Makan Bergizi Gratis dan Pembelajaran Mindful Eating Sejak Dini (mengutip Kemenkes, Pearson dkk. 2018)"
+  penerbit: "Antara"
+  tahun: 2025
+  url: "https://gorontalo.antaranews.com/berita/296202/makan-bergizi-gratis-dan-pembelajaran-mindful-eating-sejak-dini"
+  jenis: media
+  kekuatan: sedang
+S24:
+  judul: "6% Anak di Bawah Usia 1 Tahun Sudah Gunakan HP (data BPS 2024)"
+  penerbit: "GoodStats"
+  tahun: 2025
+  url: "https://data.goodstats.id/statistic/6-anak-di-bawah-usia-1-tahun-sudah-gunakan-hp-Jan9u"
+  jenis: data
+  kekuatan: sedang
+S25:
+  judul: "Edukasi feeding rules bagi orang tua balita"
+  penerbit: "Jurnal Bakti Masyarakat Indonesia, Universitas Tarumanagara"
+  tahun: 2023
+  url: "https://journal.untar.ac.id/index.php/baktimas/article/view/25049/16600"
+  jenis: jurnal
+  kekuatan: sedang
+S26:
+  judul: "Menerapkan 3 Feeding Rules untuk Mencegah Anak Stunting dan Obesitas (dr. Novitria Dwinanda, Sp.A)"
+  penerbit: "Popmama"
+  tahun: 2024
+  url: "https://www.popmama.com/kid/1-3-years-old/menerapkan-3-feeding-rules-untuk-mencegah-anak-stunting-dan-obesitas-00-vdgkd-2ldggq/amp"
+  jenis: media
+  kekuatan: lemah
+S27:
+  judul: "Umur Berapa Bayi Boleh Makan Garam? Begini Panduannya (mengutip IDAI)"
+  penerbit: "HaiBunda"
+  tahun: 2026
+  url: "https://haibunda.com/parenting/20260826083130-59-396532/umur-berapa-bayi-boleh-makan-garam-begini-panduannya"
+  jenis: media
+  kekuatan: sedang
+S28:
+  judul: "Bolehkah Menambahkan Garam dan Gula dalam MPASI?"
+  penerbit: "KlikDokter"
+  tahun: 2024
+  url: "https://www.klikdokter.com/ibu-anak/kesehatan-bayi/bolehkah-menambahkan-garam-dan-gula-dalam-mpasi"
+  jenis: media
+  kekuatan: lemah
+S29:
+  judul: "Survei Kesehatan Indonesia (SKI) 2023 Dalam Angka"
+  penerbit: "Badan Kebijakan Pembangunan Kesehatan, Kemenkes RI"
+  tahun: 2024
+  url: "https://www.badankebijakan.kemkes.go.id/SKI-2023-Dalam-Angka/"
+  jenis: resmi
+  kekuatan: kuat
+S30:
+  judul: "SSGI 2024: Prevalensi Stunting Nasional Turun Menjadi 19,8%"
+  penerbit: "Badan Kebijakan Pembangunan Kesehatan, Kemenkes RI"
+  tahun: 2025
+  url: "https://www.badankebijakan.kemkes.go.id/ssgi-2024"
+  jenis: resmi
+  kekuatan: kuat
+S31:
+  judul: "Menyimpan MPASI Sebaiknya di Chiller atau Freezer? Ini Kata Dokter"
+  penerbit: "Popmama"
+  tahun: 2024
+  url: "https://www.popmama.com/baby/7-12-months/menyimpan-mpasi-sebaiknya-di-chiller-atau-freezer-ini-kata-dokter-00-rz7fm-ghnxlx"
+  jenis: media
+  kekuatan: lemah
+S32:
+  judul: "Cooler Bag ASI (mengutip IDAI)"
+  penerbit: "Hello Sehat"
+  tahun: 2024
+  url: "https://hellosehat.com/parenting/bayi/menyusui/cooler-bag-asi/"
+  jenis: media
+  kekuatan: lemah
