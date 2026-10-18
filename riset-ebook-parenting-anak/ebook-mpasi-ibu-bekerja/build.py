@@ -167,7 +167,7 @@ Masak sekali di hari Minggu, pengasuh tinggal mengikuti kartu. Setiap angka di b
 <div class="grid2"><div class="card"><b>Apa yang kamu dapat</b><ul><li>Menu 4 minggu + daftar belanja</li>
 <li>Kartu SOP pengasuh per usia (versi HP & cetak)</li><li>Label wadah, log harian, template WhatsApp</li>
 <li>Kartu mitos vs pedoman untuk nenek</li><li>Kartu batas aman ASI perah</li></ul></div>
-<div class="card"><b>Cara memakai</b><ul><li>Baca Bab 1–4 sekali (± 1 jam)</li><li>Pilih menu minggu ini di Bab 5</li>
+<div class="card"><b>Cara memakai</b><ul><li>Baca Bab 1–4 sekali</li><li>Pilih menu minggu ini di Bab 5</li>
 <li>Cetak kartu & label dari Kit Cetak A4</li><li>Serahkan kartu ke pengasuh (Bab 6–7)</li>
 <li>Cek nomor [n] di Referensi bila ragu</li></ul></div></div>
 <div class="toc">{''.join(toc)}</div>

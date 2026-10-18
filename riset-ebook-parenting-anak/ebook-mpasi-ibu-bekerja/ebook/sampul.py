@@ -16,8 +16,8 @@ def html_sampul(subjudul: str, pil: list[str], tahun: int) -> str:
         for i in range(10))
     hari = "".join(
         f'<g transform="translate({60 + i * 140},250)"><rect width="118" height="64" rx="10" fill="#0b1f18" '
-        f'stroke="#2d4a3e" stroke-width="2"/><text x="59" y="26" text-anchor="middle" font-size="18" '
-        f'fill="#a7bfb2" font-family="Inter">{d}</text><path d="M40 42 l12 12 l26 -26" stroke="#b8f35c" '
+        f'stroke="#2d4a3e" stroke-width="2"/><text x="59" y="22" text-anchor="middle" font-size="16" '
+        f'fill="#a7bfb2" font-family="Inter">{d}</text><path d="M44 46 l9 9 l20 -20" stroke="#b8f35c" '
         f'stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>'
         for i, d in enumerate(["Sen", "Sel", "Rab", "Kam", "Jum"]))
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>
