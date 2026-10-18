@@ -1,0 +1,96 @@
+# Satu-satunya tempat angka dan aturan. Naskah & kartu memanggil {{fakta.<kunci>}} atau {{nilai.<kunci>}}.
+# Jika sumber berbeda: `nilai` = yang paling konservatif (angka terkecil), `alternatif` = nilai lain,
+# `catatan_konflik` wajib dan ikut tampil di buku.
+
+# ---------- Anjuran Kemenkes per kelompok usia ----------
+tekstur.6-8: {nilai: "bubur kental atau makanan lumat (dihaluskan)", sumber: [S03, S04]}
+tekstur.9-11: {nilai: "makanan dicincang halus dan makanan yang bisa dipegang bayi", sumber: [S03, S04]}
+tekstur.12-23: {nilai: "makanan keluarga", sumber: [S03, S04]}
+frekuensi.6-8: {nilai: "2–3 kali makan utama + 1–2 kali selingan per hari", sumber: [S03, S04]}
+frekuensi.9-11: {nilai: "3–4 kali makan utama + 1–2 kali selingan per hari", sumber: [S03, S04]}
+frekuensi.12-23: {nilai: "3–4 kali makan utama + 1–2 kali selingan per hari", sumber: [S03, S04]}
+porsi.6-8: {nilai: "2–3 sdm, bertahap sampai ½ mangkok (125 ml)", sumber: [S03, S04]}
+porsi.9-11: {nilai: "½–¾ mangkok ukuran 250 ml (125–200 ml)", sumber: [S03, S04]}
+porsi.12-23: {nilai: "¾–1 mangkok ukuran 250 ml", sumber: [S03, S04]}
+energi.6-8: {nilai: "sekitar 200 kkal per hari dari MPASI", sumber: [S03]}
+energi.9-11: {nilai: "sekitar 300 kkal per hari dari MPASI", sumber: [S03]}
+energi.12-23: {nilai: "sekitar 550 kkal per hari dari MPASI", sumber: [S03]}
+
+# ---------- Prinsip WHO 2023 ----------
+mulai.usia: {nilai: "usia 6 bulan", sumber: [S01, S20]}
+asi.lanjut: {nilai: "menyusui dilanjutkan sampai usia 2 tahun atau lebih", sumber: [S01, S02]}
+hewani.harian: {nilai: "daging, ikan, atau telur setiap hari", sumber: [S01, S02]}
+nabati.harian: {nilai: "buah dan sayur setiap hari; kacang-kacangan dan biji-bijian sering", sumber: [S02]}
+hindari.tinggi_gula_garam: {nilai: "hindari makanan dan minuman tinggi gula dan garam, termasuk minuman manis; batasi jus buah", sumber: [S02]}
+gula_garam.bawah_12:
+  nilai: "tanpa tambahan gula dan garam"
+  alternatif: ["boleh sesedikit mungkin"]
+  catatan_konflik: "Sumber berbeda: media mengutip IDAI 'boleh sesedikit mungkin', sumber lain menganjurkan tanpa tambahan sebelum 1 tahun. Buku ini memakai yang paling ketat."
+  sumber: [S27, S28, S02]
+madu.usia: {nilai: "madu baru boleh setelah usia 1 tahun (risiko botulisme bayi)", sumber: [S20]}
+
+# ---------- Statistik masalah (Bab 1) ----------
+stat.tpak_perempuan: {nilai: "56,63% (Agustus 2025)", sumber: [S14]}
+stat.nenek_pengasuh: {nilai: "naik dari 0,8% (2000) menjadi 5,7% (2014)", sumber: [S15]}
+stat.tinggal_kakek_nenek: {nilai: "sekitar 14% (data KPAI 2018)", sumber: [S16]}
+stat.pengasuhan_alternatif: {nilai: "sekitar 75% keluarga", sumber: [S18]}
+stat.protein_hewani: {nilai: "sekitar 1 dari 3 baduta", sumber: [S21]}
+stat.anemia_balita: {nilai: "23,8% anak usia 0–4 tahun", sumber: [S22]}
+stat.stunting: {nilai: "19,8% (SSGI 2024)", sumber: [S30]}
+stat.hp_1_4: {nilai: "37,02% anak usia 1–4 tahun (2024)", sumber: [S24]}
+stat.diare_balita:
+  nilai: "4,9%"
+  alternatif: ["7,4%"]
+  catatan_konflik: "Angka diare balita SKI 2023 yang dikutip berbagai sumber berbeda (4,9% dan 7,4%), kemungkinan karena definisi berbeda. Buku ini menulis rentangnya."
+  sumber: [S29]
+
+# ---------- Penyimpanan MPASI ----------
+simpan.kulkas_suhu: {nilai: "di bawah 5°C", sumber: [S05]}
+simpan.hewani_kulkas_hari: {nilai: 1, satuan: "hari", sumber: [S05]}
+simpan.nabati_kulkas_hari: {nilai: 2, satuan: "hari", sumber: [S05]}
+simpan.freezer_hari:
+  nilai: 30
+  satuan: "hari"
+  alternatif: [90, 180]
+  catatan_konflik: "AAP (dikutip detikHealth) memberi batas 1 bulan di freezer; sumber lain menyebut 3–6 bulan tanpa rujukan jelas. Buku ini memakai 30 hari."
+  sumber: [S05]
+simpan.freezer_harian: {nilai: "stok untuk dimakan hari itu tetap aman di freezer; suhu chiller naik bila pintu kulkas sering dibuka", sumber: [S31]}
+cair.aturan: {nilai: "cairkan di kulkas, jangan di suhu ruang", sumber: [S06, S07]}
+panas.aturan: {nilai: "panaskan satu porsi sampai matang merata, sisa makan dibuang, jangan bekukan ulang", sumber: [S06, S07]}
+panas.cek: {nilai: "aduk dan cek suhunya dulu sebelum disuapkan", sumber: [S07]}
+higiene.kunci: {nilai: "jaga kebersihan, pisahkan bahan mentah dan matang, masak sampai matang, simpan pada suhu aman, pakai air dan bahan baku yang aman", sumber: [S06]}
+
+# ---------- ASI perah ----------
+asi.suhu_ruang_jam:
+  nilai: 4
+  satuan: "jam"
+  kondisi: "suhu ruang 27–32°C"
+  alternatif: [6, 8]
+  catatan_konflik: "Kemenkes: maksimal 4 jam pada 27–32°C; sumber lain menyebut 6–8 jam pada suhu ruang yang lebih sejuk (≤25°C). Buku ini memakai 4 jam karena suhu ruang di Indonesia umumnya hangat."
+  sumber: [S08, S09]
+asi.cooler_jam: {nilai: 24, satuan: "jam", kondisi: "cooler bag berinsulasi dengan ice pack", sumber: [S32]}
+asi.kulkas_jam:
+  nilai: 48
+  satuan: "jam"
+  alternatif: [72, 96, 120]
+  catatan_konflik: "Kemenkes: 48–72 jam; sumber lain 4–5 hari. Buku ini memakai 48 jam (2 hari)."
+  sumber: [S08, S09]
+asi.freezer_bulan:
+  nilai: 3
+  satuan: "bulan"
+  kondisi: "freezer dua pintu (−18°C sampai −20°C)"
+  alternatif: [6]
+  catatan_konflik: "Kemenkes: 3–6 bulan untuk freezer dua pintu. Buku ini memakai 3 bulan."
+  sumber: [S08, S09]
+asi.cair_jam: {nilai: 1, satuan: "jam", kondisi: "ASI beku yang sudah dicairkan, di suhu ruang; jangan dibekukan ulang", alternatif: [2], catatan_konflik: "Sumber menyebut 1–2 jam; buku ini memakai 1 jam.", sumber: [S08]}
+
+# ---------- Hak ibu bekerja ----------
+hukum.cuti: {nilai: "cuti melahirkan paling singkat 3 bulan pertama, ditambah paling lama 3 bulan berikutnya bila ada kondisi khusus dengan surat keterangan dokter", sumber: [S10]}
+hukum.laktasi: {nilai: "hak mendapat kesempatan dan fasilitas yang layak untuk laktasi selama waktu kerja", sumber: [S10]}
+
+# ---------- Aturan makan ----------
+makan.durasi_menit: {nilai: 30, satuan: "menit", sumber: [S25, S26]}
+makan.jadwal: {nilai: "jadwal makan teratur", sumber: [S25]}
+makan.distraksi: {nilai: "makan tanpa paksaan dan tanpa distraksi seperti TV atau HP", sumber: [S25]}
+makan.minum: {nilai: "di luar jam makan, minuman yang diberikan hanya air putih", sumber: [S25]}
+makan.layar_dampak: {nilai: "balita yang makan sambil menonton gawai makan lebih sedikit buah dan sayur, dan lebih banyak camilan tinggi gula, garam, dan lemak", sumber: [S23]}
