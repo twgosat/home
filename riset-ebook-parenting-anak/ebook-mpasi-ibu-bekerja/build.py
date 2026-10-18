@@ -23,7 +23,7 @@ from ebook.pdf import gabung_pdf, html_ke_pdf, rakit_ebook
 from ebook.promo import render_banners
 from ebook.render import fakta_html, ref, render_bab
 from ebook.sampul import buat_png, html_sampul
-from ebook.tema import font_css
+from ebook.tema import PALET as P, font_css
 from ebook.uji_masak import Klaim, klaim_waktu
 from ebook.verifikasi import tulis_verifikasi
 
@@ -140,8 +140,8 @@ def html_ebook(root: Path, data: Data, menu: dict, klaim: Klaim) -> tuple[str, l
     lamp_id = f"b{len(babs) + 1}"
     kartu = "".join(blk[f"kartu_{u.replace('-', '_')}"] for u in USIA)
     isi.append(f"<section class='chapter' id='{lamp_id}'>{_kepala_bab('L', 'Lampiran', 'Kit printable (pratinjau)')}"
-               "<p>Versi siap cetak ada di file terpisah: <b>Kartu Pengasuh (HP).pdf</b> untuk dibaca di ponsel dan "
-               "<b>Kit Cetak A4.pdf</b> untuk dicetak, dilipat dua, dan ditempel di kulkas.</p>"
+               "<p>Versi siap pakai ada di bagian <b>BONUS</b> setelah halaman penutup: <b>Kartu Pengasuh (HP)</b> untuk "
+               "dibaca di ponsel dan <b>Kit Cetak A4</b> untuk dicetak, dilipat dua, dan ditempel di kulkas.</p>"
                f"{kartu}{blk['label_contoh']}{blk['log_contoh']}</section>")
     bagian_bab.append((f"#{lamp_id}", "Lampiran — Kit printable"))
     toc.append("<div class='bagian'>Penutup</div>")
@@ -160,6 +160,8 @@ def html_ebook(root: Path, data: Data, menu: dict, klaim: Klaim) -> tuple[str, l
                f"<ol class='referensi'>{daftar}</ol></section>")
     bagian_bab.append((f"#{ref_id}", "Referensi"))
     toc.append(f"<a href='#{ref_id}'><span>Referensi</span><span class='pg'></span></a>")
+    toc.append("<a><span><b>BONUS</b>: Kartu Pengasuh, Kit Cetak A4, Kartu Porsi MPASI</span>"
+               "<span class='pg'>setelah penutup</span></a>")
 
     depan = f"""<section class="front">
 <div class="brand">GOSATSET.XYZ · EBOOK PARENTING</div>
@@ -168,9 +170,9 @@ def html_ebook(root: Path, data: Data, menu: dict, klaim: Klaim) -> tuple[str, l
 Masak sekali di hari Minggu, pengasuh tinggal mengikuti kartu. Setiap angka di buku ini punya sumber resmi.</p>
 <div class="grid2"><div class="card"><b>Apa yang kamu dapat</b><ul><li>Menu 4 minggu + daftar belanja</li>
 <li>Kartu SOP pengasuh per usia (versi HP & cetak)</li><li>Label wadah, log harian, template WhatsApp</li>
-<li>Kartu mitos vs pedoman untuk nenek</li><li>Kartu batas aman ASI perah</li></ul></div>
+<li>Kartu mitos vs pedoman untuk nenek</li><li>Kartu batas aman ASI perah</li><li><b>Bonus</b> siap cetak di akhir buku</li></ul></div>
 <div class="card"><b>Cara memakai</b><ul><li>Baca Bab 1–4 sekali</li><li>Pilih menu minggu ini di Bab 5</li>
-<li>Cetak kartu & label dari Kit Cetak A4</li><li>Serahkan kartu ke pengasuh (Bab 6–7)</li>
+<li>Cetak kartu & label dari Bonus Kit Cetak A4</li><li>Serahkan kartu ke pengasuh (Bab 6–7)</li>
 <li>Cek nomor [n] di Referensi bila ragu</li></ul></div></div>
 <div class="toc">{''.join(toc)}</div>
 <div class="disclaimer"><b>Penting:</b> Ebook ini adalah panduan edukasi yang disusun dari pedoman WHO, Kementerian Kesehatan,
@@ -220,45 +222,133 @@ def bangun_lead(root: Path, data: Data, klaim: Klaim, keluar: Path) -> Path:
     return html_ke_pdf(_dok(root, depan + promo, "@page{margin:0} .kartu:last-child{break-after:auto}"), keluar, "A5")
 
 
+# ---------------------------------------------------------------- gabungan: ebook + pembatas + bonus
+def html_pembatas(root: Path, bonus: list[tuple[str, str, str, int, int]]) -> str:
+    """bonus: (nama, ukuran, kegunaan, hal_awal, hal_akhir) — nomor halaman = penomoran viewer setelah Sampul."""
+    warna = [P["coral"], P["langit"], P["kuning"]]
+    kartu = "".join(
+        f"<div class='bonus'><div class='no' style='background:{warna[i % 3]}'>{i + 1}</div><div>"
+        f"<div class='nm'>{_h.escape(nama)}</div><div class='ket'>{_h.escape(ukuran)} · {_h.escape(guna)}</div></div>"
+        f"<div class='hal'>hal {a}–{z}</div></div>"
+        for i, (nama, ukuran, guna, a, z) in enumerate(bonus))
+    hadiah = (f"<svg width='190' height='170' viewBox='0 0 190 170'><rect x='20' y='62' width='150' height='100' rx='14' "
+              f"fill='{P['coral']}'/><rect x='10' y='42' width='170' height='34' rx='10' fill='#e2553a'/>"
+              f"<rect x='84' y='42' width='22' height='120' fill='{P['kuning']}'/>"
+              f"<path d='M95 42 C70 5 35 20 60 42 Z M95 42 C120 5 155 20 130 42 Z' fill='{P['kuning']}' stroke='#e0a800' stroke-width='3'/>"
+              f"<circle cx='30' cy='20' r='6' fill='{P['langit']}'/><circle cx='165' cy='14' r='5' fill='{P['lavender']}'/>"
+              f"<circle cx='178' cy='70' r='4' fill='{P['langit']}'/></svg>")
+    css = (root / "templates" / "ebook.css").read_text(encoding="utf-8")
+    return f"""<!doctype html><html lang='id'><head><meta charset='utf-8'><style>{font_css()}{css}
+@page{{size:Letter;margin:0}} body{{margin:0}} .pembatas svg{{display:block;margin:0 auto}}
+.pembatas{{width:8.5in;height:11in;padding:1.1in 0.9in;position:relative;overflow:hidden;text-align:center}}
+.pita{{position:absolute;left:0;right:0;top:0;height:.35in;background:linear-gradient(90deg,{P['coral']} 0 33%,{P['kuning']} 33% 66%,{P['langit']} 66%)}}
+.label{{display:inline-block;margin-top:18px;font:900 15px Nunito,Inter,sans-serif;letter-spacing:.16em;color:#fff;background:{P['aksen2']};padding:7px 16px;border-radius:999px}}
+.besar{{font:900 96px/1 Nunito,Inter,sans-serif;color:#e2553a;margin:14px 0 4px}}
+.sub{{font:800 24px Nunito,Inter,sans-serif;color:{P['judul']}}}
+.lead2{{max-width:5.8in;margin:16px auto 26px;color:{P['redup']};font-size:14px;line-height:1.6}}
+.bonus{{display:flex;align-items:center;gap:16px;text-align:left;background:#fff;border:2px solid {P['garis']};border-radius:18px;
+padding:14px 18px;margin:12px auto;max-width:6.2in}}
+.bonus .no{{flex:none;width:46px;height:46px;border-radius:50%;color:#fff;font:900 24px/46px Nunito,Inter,sans-serif;text-align:center}}
+.bonus .nm{{font:900 19px Nunito,Inter,sans-serif;color:{P['judul']}}}
+.bonus .ket{{font-size:13px;color:{P['redup']};margin-top:2px}}
+.bonus .hal{{margin-left:auto;font:800 15px Nunito,Inter,sans-serif;color:{P['aksen']};white-space:nowrap}}
+.catatan{{max-width:6.2in;margin:22px auto 0;font-size:12px;color:{P['redup']};text-align:left;background:{P['kuning_muda']};
+border-radius:12px;padding:10px 14px;line-height:1.55}}
+</style></head><body><section class='pembatas'><div class='pita'></div>{hadiah}
+<div class='label'>BATAS AKHIR EBOOK UTAMA</div><div class='besar'>BONUS</div>
+<div class='sub'>untuk pembeli ebook {JUDUL}</div>
+<p class='lead2'>Halaman-halaman setelah ini adalah <b>produk bonus dari pembelian ebook utama</b>: alat siap pakai untuk
+pengasuh, nenek, atau daycare. Isinya mengikuti patokan resmi yang sama dengan Bab 2, 4, dan 8.</p>
+{kartu}
+<div class='catatan'><b>Cara mencetak:</b> pilih nomor halaman bonus di menu cetak. Halaman bonus berukuran berbeda dari
+ebook (A5 dan A4) supaya pas dibaca di ponsel atau dicetak; pilih opsi "Sesuaikan dengan kertas / Fit to page" bila
+printer memintanya. Kartu lipat Kit Cetak dicetak A4 mendatar lalu dilipat dua.</div>
+</section></body></html>"""
+
+
+def gabung_bonus(root: Path, ebook: Path, kartu: Path, kit: Path, lead: Path, keluar: Path, metadata: dict) -> Path:
+    """Satu file: ebook utama → pembatas BONUS → Kartu Pengasuh (HP) → Kit Cetak A4 → Kartu Porsi MPASI
+    (tanpa halaman promosi lead magnet, karena pembaca sudah membeli ebook)."""
+    from pypdf import PdfReader, PdfWriter
+    n = {k: len(PdfReader(str(p)).pages) for k, p in (("e", ebook), ("k", kartu), ("t", kit), ("l", lead))}
+    n_lead = n["l"] - 1
+    hal_bonus = n["e"]                     # label viewer: Sampul, 1..n_e-1, lalu pembatas = n_e
+    a_k = hal_bonus + 1
+    a_t = a_k + n["k"]
+    a_l = a_t + n["t"]
+    daftar = [("Kartu Pengasuh (versi HP)", f"{n['k']} halaman A5", "3 kelompok usia × sisi depan dan belakang", a_k, a_t - 1),
+              ("Kit Cetak A4", f"{n['t']} halaman A4", "kartu lipat untuk kulkas, label wadah, log harian, mitos, ASI perah",
+               a_t, a_l - 1),
+              ("Kartu Porsi MPASI (ringkas)", f"{n_lead} halaman A5", "takaran per usia untuk ditempel atau dibagikan",
+               a_l, a_l + n_lead - 1)]
+    pemb = html_ke_pdf(html_pembatas(root, daftar), keluar.parent / "_pembatas.pdf", "Letter")
+    w = PdfWriter()
+    w.append(str(ebook))                   # ikut membawa bookmark dan tautan footer ebook
+    idx = len(w.pages)
+    w.append(str(pemb), import_outline=False)
+    w.append(str(kartu), import_outline=False)
+    w.append(str(kit), import_outline=False)
+    w.append(str(lead), pages=(0, n_lead), import_outline=False)
+    induk = w.add_outline_item("BONUS untuk pembeli ebook", idx)
+    w.add_outline_item("Bonus 1 — Kartu Pengasuh (HP)", idx + 1, parent=induk)
+    w.add_outline_item("Bonus 2 — Kit Cetak A4", idx + 1 + n["k"], parent=induk)
+    w.add_outline_item("Bonus 3 — Kartu Porsi MPASI", idx + 1 + n["k"] + n["t"], parent=induk)
+    w.set_page_label(0, 0, prefix="Sampul")
+    w.set_page_label(1, len(w.pages) - 1, style="/D", start=1)
+    w.add_metadata(metadata)
+    with open(keluar, "wb") as fh:
+        w.write(fh)
+    pemb.unlink()
+    return keluar
+
+
 # ---------------------------------------------------------------- orkestrasi
 def bangun(root: Path = ROOT, keluar: Path | None = None, hanya: str | None = None) -> dict[str, Path]:
+    """hanya: None (semua) | kartu | kit | lead-magnet | ebook | gabungan (ebook + bonus, tanpa banner)."""
     root = Path(root)
     keluar = Path(keluar or root / "dist")
     data, menu, klaim = siapkan(root)
     hasil: dict[str, Path] = {}
-    if hanya in (None, "ebook"):
+    ingin = (lambda *k: hanya is None or hanya in k)
+    if ingin("ebook", "gabungan"):
         err = cek_naskah(root / "naskah", data)
         if err:
             raise ValueError("Naskah tidak lolos:\n" + "\n".join(err))
-    if hanya in (None, "kartu"):
+    if ingin("kartu", "gabungan"):
         hasil["kartu"] = bangun_kartu_hp(root, data, keluar / "Kartu Pengasuh (HP).pdf")
-    if hanya in (None, "kit"):
+    if ingin("kit", "gabungan"):
         hasil["kit"] = bangun_kit(root, data, keluar / "Kit Cetak A4.pdf")
-    if hanya in (None, "lead-magnet"):
+    if ingin("lead-magnet", "gabungan"):
         hasil["lead"] = bangun_lead(root, data, klaim, keluar / "Gratis - Kartu Porsi MPASI.pdf")
-    if hanya in (None, "ebook"):
+    if ingin("ebook", "gabungan"):
         sampul_html = html_sampul(subjudul(klaim), ["Menu 4 minggu", "Kartu SOP pengasuh", "Semua angka bersumber"], TAHUN)
         sampul = buat_png(sampul_html, keluar / "promo" / "00-cover-HD-2550x3300.png", 3)
         (keluar / "promo" / "sampul.html").write_text(sampul_html, encoding="utf-8")
         html, bab, _ = html_ebook(root, data, menu, klaim)
         (keluar / "ebook.html").write_text(html, encoding="utf-8")
-        info = rakit_ebook(html, keluar / f"{JUDUL}.pdf", JUDUL, sampul, bab, f"{JUDUL} | GoSatSet.xyz", BRAND_URL,
-                           {"/Author": "GoSatSet", "/Subject": subjudul(klaim)})
-        hasil["ebook"] = keluar / f"{JUDUL}.pdf"
+        meta = {"/Title": JUDUL, "/Author": "GoSatSet", "/Subject": subjudul(klaim)}
+        info = rakit_ebook(html, keluar / f"{JUDUL} (ebook saja).pdf", JUDUL, sampul, bab, f"{JUDUL} | GoSatSet.xyz",
+                           BRAND_URL, {k: v for k, v in meta.items() if k != "/Title"})
+        hasil["ebook"] = keluar / f"{JUDUL} (ebook saja).pdf"
         hasil["info"] = info  # type: ignore[assignment]
+        if "kartu" in hasil and "kit" in hasil and "lead" in hasil:
+            hasil["gabungan"] = gabung_bonus(root, hasil["ebook"], hasil["kartu"], hasil["kit"], hasil["lead"],
+                                             keluar / f"{JUDUL}.pdf", meta)
         ver = tulis_verifikasi(data, menu, klaim, JUDUL, dt.date.today().isoformat())
         for tujuan in (keluar / f"Verifikasi_{JUDUL}.md", root / "jualan" / f"Verifikasi_{JUDUL}.md"):
             tujuan.write_text(ver, encoding="utf-8")
         hasil["verifikasi"] = keluar / f"Verifikasi_{JUDUL}.md"
+    if ingin("ebook"):
         sampul_mockup = buat_png(sampul_html, keluar / "promo" / "_sampul-2x.png", 2)
         hasil["banner"] = render_banners(sampul_mockup, {"halaman": info["halaman"], "bab": len(bab) - 2,
                                                          "sumber": len(data.sumber)}, keluar / "promo")  # type: ignore[assignment]
+        sampul_mockup.unlink()
     return hasil
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--hanya", choices=["kartu", "kit", "lead-magnet", "ebook"])
+    ap.add_argument("--hanya", choices=["kartu", "kit", "lead-magnet", "ebook", "gabungan"])
     a = ap.parse_args()
     for k, v in bangun(hanya=a.hanya).items():
         print(f"{k}: {v}")

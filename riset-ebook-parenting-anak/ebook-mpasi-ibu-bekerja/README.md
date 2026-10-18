@@ -8,16 +8,17 @@ Ebook PDF dan kit printable untuk orang tua bekerja dengan anak 6–23 bulan yan
 
 ```bash
 pip install -r requirements.txt     # butuh Chromium Playwright (sudah ada di /opt/pw-browsers pada sesi cloud)
-python -m pytest -q                 # 54 tes
+python -m pytest -q                 # 58 tes
 python build.py                     # semua output ke dist/
-python build.py --hanya lead-magnet # kartu | kit | lead-magnet | ebook
+python build.py --hanya lead-magnet # kartu | kit | lead-magnet | ebook | gabungan
 ```
 
 ## Output (`dist/`)
 
 | File | Isi |
 |---|---|
-| `MPASI Ibu Bekerja.pdf` | Ebook Letter, 43 halaman, tema putih, bookmark per bab, footer bertaut ke GoSatSet.xyz |
+| `MPASI Ibu Bekerja.pdf` | **File jual utama (61 halaman):** ebook → pembatas BONUS → Kartu Pengasuh (HP) → Kit Cetak A4 → Kartu Porsi MPASI (tanpa halaman promosi). Bookmark per bab dan per bonus |
+| `MPASI Ibu Bekerja (ebook saja).pdf` | Ebook Letter 44 halaman, tema putih, footer bertaut ke GoSatSet.xyz (bahan gabungan) |
 | `Kartu Pengasuh (HP).pdf` | 3 kartu × 2 sisi, A5, huruf ≥ 14 pt |
 | `Kit Cetak A4.pdf` | 3 kartu lipat (A4 landscape) + label, log, mitos, ASI perah |
 | `Gratis - Kartu Porsi MPASI.pdf` | Lead magnet |

@@ -11,7 +11,7 @@
 
 ## FAQ untuk halaman jualan
 
-- **Formatnya apa?** PDF. Ada 3 file: ebook (43 halaman), Kartu Pengasuh versi HP, dan Kit Cetak A4.
+- **Formatnya apa?** Satu file PDF (61 halaman): ebook 44 halaman, lalu halaman pembatas BONUS, Kartu Pengasuh versi HP, Kit Cetak A4, dan Kartu Porsi MPASI.
 - **Tidak punya printer?** Kartu Pengasuh versi HP bisa dikirim langsung ke WhatsApp pengasuh, dan template laporan WA ada di Bab 6.
 - **Bisa dicetak?** Bisa. Kit Cetak A4 berisi kartu yang dilipat dua, label wadah, log harian, kartu mitos, dan kartu ASI perah.
 - **Cara mengunduh ulang?** Lewat email konfirmasi pembelian Lynk.id.
@@ -19,10 +19,10 @@
 
 ## Checklist rilis
 
-- [ ] `rm -rf dist && python build.py` selesai tanpa error, menghasilkan 4 PDF + `promo/` + `Verifikasi_*.md`
+- [ ] `rm -rf dist && python build.py` selesai tanpa error, menghasilkan 6 PDF (termasuk file gabungan `MPASI Ibu Bekerja.pdf`) + `promo/` + `Verifikasi_*.md`
 - [ ] Ukuran `dist/MPASI Ibu Bekerja.pdf` < 20 MB
-- [ ] Unggah 3 file ke produk berbayar: `MPASI Ibu Bekerja.pdf`, `Kartu Pengasuh (HP).pdf`, `Kit Cetak A4.pdf`
+- [ ] Unggah 1 file ke produk berbayar: `MPASI Ibu Bekerja.pdf` (ebook + bonus). File bonus terpisah di `rilis/v1/bonus-terpisah/` opsional, misalnya untuk dikirim ke pengasuh
 - [ ] Unggah `Gratis - Kartu Porsi MPASI.pdf` sebagai produk gratis (lead magnet)
 - [ ] Cek biaya transaksi Lynk.id di dasbor (artikel lama menyebut 5% untuk paket gratis)
-- [ ] Lakukan 1 pembelian uji dan pastikan email berisi 3 file
+- [ ] Lakukan 1 pembelian uji dan pastikan email berisi file ebook + bonus
 - [ ] Kirim versi final ke pembeli pre-order

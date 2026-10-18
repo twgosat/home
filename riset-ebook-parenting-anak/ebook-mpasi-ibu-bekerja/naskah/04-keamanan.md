@@ -44,4 +44,4 @@ Batas kulkas dan freezer di atas adalah angka American Academy of Pediatrics yan
 
 ## Label: aturan kecil yang menyelamatkan
 
-Setiap wadah diberi label: isi, usia, tanggal masak, dan "pakai sebelum" (lembar siap cetak ada di Kit Cetak A4). Pengasuh cukup membaca tanggalnya, tidak perlu mengingat.
+Setiap wadah diberi label: isi, usia, tanggal masak, dan "pakai sebelum" (lembar siap cetak ada di Bonus Kit Cetak A4 di akhir buku). Pengasuh cukup membaca tanggalnya, tidak perlu mengingat.

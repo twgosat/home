@@ -1,11 +1,11 @@
 # Paket Produk — MPASI Ibu Bekerja
 
-*Disusun 18 Oktober 2026 dari PDF hasil build (43 halaman). Angka harga pesaing adalah cuplikan marketplace dan perlu dicek ulang setiap 3 bulan.*
+*Disusun 18 Oktober 2026 dari PDF hasil build (satu file 61 halaman: ebook 44 halaman + pembatas + 16 halaman bonus). Angka harga pesaing adalah cuplikan marketplace dan perlu dicek ulang setiap 3 bulan.*
 
 ## Deskripsi Singkat
 
 ```
-Masak MPASI sekali di hari Minggu, pengasuh tinggal ikut kartu. Ebook PDF 43 halaman untuk orang tua bekerja dengan anak 6–23 bulan: menu 4 minggu tanpa gula-garam dengan protein hewani setiap hari, aturan simpan dan panaskan yang aman, plus Kartu Pengasuh dan Kit Cetak untuk nenek, pengasuh, atau daycare. Semua angka bersumber dari WHO, Kemenkes, dan IDAI.
+Masak MPASI sekali di hari Minggu, pengasuh tinggal ikut kartu. Ebook PDF 44 halaman + bonus kit siap cetak untuk orang tua bekerja dengan anak 6–23 bulan: menu 4 minggu tanpa gula-garam dengan protein hewani setiap hari, aturan simpan dan panaskan yang aman, plus Kartu Pengasuh dan Kit Cetak untuk nenek, pengasuh, atau daycare. Semua angka bersumber dari WHO, Kemenkes, dan IDAI.
 ```
 
 Versi satu baris (untuk judul kecil, bio, atau caption):
@@ -38,10 +38,12 @@ Bagian 4 – Ibu tetap menyusui: batas aman ASI perah dan hak ibu bekerja menuru
 Bagian 5 – Alat bantu: checklist mingguan, FAQ, kuis 5 menit untuk pengasuh, kamus istilah
 
 🎁 YANG KAMU DAPATKAN
-✔️ Ebook PDF 43 halaman, 10 bab + lampiran + referensi
+✔️ Ebook PDF 44 halaman, 10 bab + lampiran + referensi
 ✔️ Menu 4 minggu (tanpa gula, garam, madu, atau kecap; protein hewani setiap hari) + daftar belanja per minggu
-✔️ Kartu Pengasuh untuk 3 kelompok usia (6–8, 9–11, 12–23 bulan), huruf besar, versi HP (PDF A5)
+🎁 BONUS (dalam file yang sama, setelah ebook):
+✔️ Kartu Pengasuh untuk 3 kelompok usia (6–8, 9–11, 12–23 bulan), huruf besar, versi HP (A5)
 ✔️ Kit Cetak A4: kartu lipat untuk ditempel di kulkas, label wadah freezer, log harian, kartu mitos vs pedoman, kartu ASI perah
+✔️ Kartu Porsi MPASI ringkas untuk ditempel atau dibagikan ke keluarga
 ✔️ Daftar referensi lengkap: setiap angka di buku punya nomor sumber (WHO, Kemenkes, IDAI, BPS)
 
 👩‍👧 COCOK UNTUK
@@ -83,7 +85,7 @@ mpasi ibu bekerja, menu mpasi seminggu, cara menyimpan mpasi di freezer, mpasi u
 
 | Kolom | Isi |
 |---|---|
-| Jumlah halaman | 43 (ebook) + Kartu Pengasuh HP 6 halaman + Kit Cetak A4 7 halaman |
+| Jumlah halaman | 61 dalam satu file: ebook 44 + pembatas BONUS 1 + Kartu Pengasuh 6 + Kit Cetak A4 7 + Kartu Porsi 3 |
 | Kategori | Parenting / Ibu & Anak (alternatif: Kesehatan Keluarga) |
 | Format | PDF |
 

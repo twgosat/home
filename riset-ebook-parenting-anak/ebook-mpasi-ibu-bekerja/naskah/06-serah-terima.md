@@ -12,7 +12,7 @@ Satu kartu untuk setiap kelompok usia. Sisi depan berisi takaran (tekstur, berap
 
 {{blok.kartu_9_11}}
 
-Versi siap pakai ada di dua file: **Kartu Pengasuh (HP).pdf** untuk dikirim ke ponsel pengasuh, dan **Kit Cetak A4.pdf** untuk dicetak, dilipat dua, lalu ditempel di pintu kulkas.
+Versi siap pakai ada di bagian **BONUS** di akhir buku ini: **Kartu Pengasuh (HP)** untuk dikirim ke ponsel pengasuh (cukup kirim tangkapan layar halamannya), dan **Kit Cetak A4** untuk dicetak, dilipat dua, lalu ditempel di pintu kulkas.
 
 ## Alat 2: Log harian
 

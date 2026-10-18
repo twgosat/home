@@ -39,7 +39,7 @@ Total waktu kerja aktif dalam rencana menu ini paling lama **{{blok.estimasi_men
 - Panci kukus bersusun, supaya protein dan sayur bisa dikukus sekaligus.
 - Cetakan es batu bertutup atau wadah kecil food grade, untuk porsi usia 6–8 bulan.
 - Kantong klip atau wadah bersekat, untuk usia 9 bulan ke atas.
-- Spidol dan label (tersedia di Kit Cetak), karena setiap wadah harus bertanggal.
+- Spidol dan label (tersedia di Bonus Kit Cetak A4), karena setiap wadah harus bertanggal.
 - Blender atau saringan kawat, untuk tekstur lumat.
 
 ## Menyesuaikan tekstur dalam satu sesi
